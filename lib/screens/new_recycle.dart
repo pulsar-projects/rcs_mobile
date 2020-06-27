@@ -155,7 +155,7 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    RcsAppBar rcsAppBar = RcsAppBar();
+    //RcsAppBar rcsAppBar = RcsAppBar();
     Size size = MediaQuery.of(context).size;
 
     List<Widget> stackChildren = [];
@@ -176,7 +176,7 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
     }
 
     return Scaffold(
-      appBar: rcsAppBar,
+      appBar: AppBar(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.image),
         tooltip: "Pick Image from gallery",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/screens/login_screen.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
 import 'package:rcs_mobile/screens/new_recycle.dart';
 
@@ -13,8 +14,9 @@ class RcsApp extends StatelessWidget {
     return MaterialApp(
         title: 'RCS App',
         theme: ThemeData(),
-        home: DashboardScreen(),
+        home: LoginScreen(),
         routes: {
+          LoginScreen.routeName: (_) => LoginScreen(),
           DashboardScreen.routeName: (_) => DashboardScreen(),
           NewRecycleScreen.routeName: (_) => NewRecycleScreen()
         });
