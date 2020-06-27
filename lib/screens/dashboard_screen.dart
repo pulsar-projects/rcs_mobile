@@ -16,6 +16,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     RcsAppBar rcsAppBar = RcsAppBar();
 
+    const lightGreen = Color(0xFF70b57c);
+
     return Scaffold(
       appBar: rcsAppBar,
       drawer: Drawer(
@@ -91,12 +93,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           borderSide: BorderSide(
-                            color: Color(0xFF70b57c),
+                            color: lightGreen,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)),
-                          borderSide: BorderSide(color: Color(0xFF70b57c)),
+                          borderSide: BorderSide(color: lightGreen),
                         ),
                       ),
                     ),
@@ -107,7 +109,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xFF70b57c).withOpacity(0.5),
+                          color: lightGreen.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset: Offset(0, 3), // changes position of shadow
@@ -231,7 +233,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Color(0xFF70b57c),
+                                      color: lightGreen,
                                       shape: BoxShape.rectangle,
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(
@@ -240,7 +242,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xFF70b57c)
+                                          color: lightGreen
                                               .withOpacity(0.5),
                                           spreadRadius: 5,
                                           blurRadius: 7,
@@ -278,7 +280,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           //TODO: implement handler
         },
         child: Icon(Icons.add),
-        backgroundColor: Color(0xFF70b57c),
+        backgroundColor: lightGreen,
       ),
     );
   }
