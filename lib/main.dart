@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:rcs_mobile/login_page.dart';
+import 'package:rcs_mobile/screens/login_screen.dart';
+import 'package:rcs_mobile/screens/dashboard_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(RcsApp());
 }
 
-class MyApp extends StatelessWidget {
+class RcsApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'RCS App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: LoginPage(),
-    );
+        title: 'RCS App',
+        theme: ThemeData(),
+//        home: DashboardScreen(),
+        home: LoginScreen(),
+        routes: {
+          LoginScreen.routeName: (_) => LoginScreen(),
+          DashboardScreen.routeName: (_) => DashboardScreen(),
+        });
   }
 }
