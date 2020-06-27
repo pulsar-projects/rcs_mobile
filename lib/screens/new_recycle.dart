@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/screens/recycle_centers.dart';
 import 'package:rcs_mobile/widgets/index.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
@@ -28,7 +29,7 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
   double _imageHeight;
   bool _busy = false;
 
-  List _recognitions;
+  List _recognitions = [];
 
   @override
   void initState() {
@@ -112,7 +113,7 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
 
   ssdMobileNet(File image) async {
     var recognitions = await Tflite.detectObjectOnImage(
-        path: image.path, numResultsPerClass: 1);
+        path: image.path, numResultsPerClass: 5);
 
     setState(() {
       _recognitions = recognitions;
@@ -120,7 +121,6 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
   }
 
   List<Widget> renderBoxes(Size screen) {
-    if (_recognitions == null) return [];
     if (_imageWidth == null || _imageHeight == null) return [];
 
     double factorX = screen.width;
@@ -164,8 +164,9 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
       top: 0.0,
       left: 0.0,
       width: size.width,
-      child: _image == null ? Text("No Image Selected") : Image.file(_image),
-    ));
+      child: _image == null ? Card(child: Text("No Image Selected")) : Image.file(_image),
+    )
+    );
 
     stackChildren.addAll(renderBoxes(size));
 
@@ -177,13 +178,43 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
 
     return Scaffold(
       appBar: AppBar(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.image),
-        tooltip: "Pick Image from gallery",
-        onPressed: selectFromImagePicker,
-      ),
-      body: Stack(
-        children: stackChildren,
+      body: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height*0.6,
+            child: Stack(
+            children: stackChildren,
+        ),
+          ),
+          RaisedButton
+            (
+            child: Text('Find nearest recycle centers'),
+            textColor: Colors.white,
+            onPressed: (_recognitions.length == 0) ? null : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      RecycleCentersMap(recognitions: _recognitions),
+                ),
+              );
+            },
+            color: Colors.green,
+          ),
+          RaisedButton
+            (
+            child: Text('Load image from device'),
+            onPressed: selectFromImagePicker,
+            textColor: Colors.white,
+            color: Colors.green,
+          ),
+          RaisedButton
+            (
+            child: Text('Take photo'),
+            onPressed: null,
+            textColor: Colors.white,
+            color: Colors.green,
+          )],
       ),
     );
   }
