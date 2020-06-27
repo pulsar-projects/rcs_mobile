@@ -45,3 +45,6 @@ app.*.map.json
 
 # Project specific
 **/credentials
+
+# Developer specific
+ios/Runner.xcodeproj/project.pbxproj
