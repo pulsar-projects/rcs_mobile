@@ -13,7 +13,6 @@ class RcsApp extends StatelessWidget {
     return MaterialApp(
         title: 'RCS App',
         theme: ThemeData(),
-//        home: DashboardScreen(),
         home: LoginScreen(),
         routes: {
           LoginScreen.routeName: (_) => LoginScreen(),

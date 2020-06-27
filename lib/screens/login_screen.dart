@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        color: const Color(0xFF70b57c).withOpacity(0.5),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -31,16 +31,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _signInButton() {
-    return OutlineButton(
-      splashColor: Colors.grey,
+    return RaisedButton(
+      splashColor: Color(0xFFbbedc4),
       onPressed: () {
         signInWithGoogle().whenComplete(() {
           Navigator.of(context).pushReplacementNamed(DashboardScreen.routeName);
         });
       },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
