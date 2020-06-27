@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
+import 'package:rcs_mobile/screens/new_recycle.dart';
 
 void main() {
   runApp(RcsApp());
@@ -15,6 +16,7 @@ class RcsApp extends StatelessWidget {
         home: DashboardScreen(),
         routes: {
           DashboardScreen.routeName: (_) => DashboardScreen(),
+          NewRecycleScreen.routeName: (_) => NewRecycleScreen()
         });
   }
 }

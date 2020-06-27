@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rcs_mobile/widgets/index.dart';
+import 'package:rcs_mobile/screens/new_recycle.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const routeName = '/dashboard';
@@ -274,12 +275,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //TODO: implement handler
+        child: Icon(Icons.image),
+        tooltip: "Pick Image from gallery",
+        onPressed:  () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  NewRecycleScreen(),
+            ),
+          );
         },
-        child: Icon(Icons.add),
         backgroundColor: Color(0xFF70b57c),
       ),
+
     );
   }
 }
