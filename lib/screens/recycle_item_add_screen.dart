@@ -118,7 +118,9 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
                         name: _recognitions[0]['detectedClass'],
                         description: _recognitions[0]['detectedClass'],
                         recycleCenter: _recycleCenter,
-                        dateTime: DateTime.now()
+                        dateTime: DateTime.now(),
+                        image: _predictedImage,
+                        imagePath: _predictedImage.path,
                     );
 
                     await Provider.of<RecycledItemsProvider>(context, listen: false)
