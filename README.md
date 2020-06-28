@@ -1,6 +1,6 @@
 # Geopivot Mobile App - Recycling Centers and Services Mobile App
 
-[logo](assets/logo.png)
+![logo](assets/logo.png)
 
 # Pitch
 
