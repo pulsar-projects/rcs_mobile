@@ -17,7 +17,8 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   TfliteHelper _tfliteHelper = TfliteHelper();
   File _predictedImage;
 
-  List<Widget> _recognitions = [];
+  List _recognitions = [];
+  List<Widget> _renderBoxes = [];
 
   @override
   void initState() {
@@ -55,6 +56,8 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    _renderBoxes = _tfliteHelper.renderBoxes(size, size.width, size.height);
+
     return Scaffold(
       appBar: AppBar(),
       body: (_isLoading == true)
@@ -66,8 +69,8 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.6,
                   child: ProcessedImage(
-                    recognitions: _recognitions,
                     imgFile: _predictedImage,
+                    renderBoxes: _renderBoxes,
                     size: size,
                   ),
                 ),
