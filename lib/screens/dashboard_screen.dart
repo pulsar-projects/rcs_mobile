@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rcs_mobile/providers/recycled_items_provider.dart';
 import 'package:rcs_mobile/widgets/common/index.dart';
 import 'package:rcs_mobile/widgets/dashboard/index.dart';
 
@@ -52,7 +54,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SliverAppBar(
             pinned: true,
             actions: isShrink ? <Widget>[AvatarFlatButton()] : null,
-            backgroundColor: isShrink ? Theme.of(context).colorScheme.surface : Colors.transparent,
+            backgroundColor: isShrink
+                ? Theme.of(context).colorScheme.surface
+                : Colors.transparent,
             elevation: 4,
             expandedHeight: Platform.isIOS
                 ? (MediaQuery.of(context).size.height) * 0.35
@@ -83,12 +87,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return RecycledCard(index: index,);
-              },
-              childCount: 50,
+          Consumer<RecycledItemsProvider>(
+            builder: (context, recycledItemsProvider, _) => SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return RecycledCard(
+                    recycledItem: recycledItemsProvider.getRecycledItems[index],
+                  );
+                },
+                childCount: recycledItemsProvider.getRecycledItems.length,
+              ),
             ),
           ),
         ],

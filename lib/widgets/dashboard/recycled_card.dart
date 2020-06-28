@@ -1,12 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/model/recycled_item_model.dart';
 
 class RecycledCard extends StatelessWidget {
-  final int index;
+  final RecycledItem recycledItem;
 
   const RecycledCard({
     Key key,
-    this.index,
+    this.recycledItem,
   }) : super(key: key);
 
   @override
@@ -36,19 +37,23 @@ class RecycledCard extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             DateFormat('yyyy-MM-dd kk:mm')
-                                .format(DateTime.now()),
+                                .format(recycledItem.dateTime),
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.w300,
                               color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
-                          Text(
-                            'Your Item $index',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                          SizedBox(
+                            width: 150,
+                            child: Text(
+                              recycledItem.name,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                           Container(
@@ -63,12 +68,16 @@ class RecycledCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text(
-                            'Item $index short description...',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                          SizedBox(
+                            width: 150,
+                            child: Text(
+                              recycledItem.description,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           )
                         ],
@@ -76,7 +85,7 @@ class RecycledCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: IconButton(
-                          tooltip: 'Add a new item',
+                          tooltip: 'Item details',
                           onPressed: () {
                             //TODO: implement handler
                           },
