@@ -3,37 +3,31 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/common/tflite_helper.dart';
 
-class ProcessedImage extends StatefulWidget {
-  @override
-  _ProcessedImageState createState() => _ProcessedImageState();
-}
+class ProcessedImage extends StatelessWidget {
+  final File imgFile;
+  final List<Widget> recognitions;
+  final Size size;
 
-class _ProcessedImageState extends State<ProcessedImage> {
-  TfliteHelper _tfliteHelper = TfliteHelper();
-
-  File _image;
-
-  double _imageWidth;
-
-  double _imageHeight;
-
-  List<Widget> stackChildren = [];
+  ProcessedImage({
+    this.imgFile,
+    this.recognitions,
+    this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    List<Widget> stackChildren = [];
 
     stackChildren.add(Positioned(
       top: 0.0,
       left: 0.0,
       width: size.width,
-      child: _image == null
+      child: imgFile == null
           ? Card(child: Text("No Image Selected"))
-          : Image.file(_image),
+          : Image.file(imgFile),
     ));
 
-    stackChildren
-        .addAll(_tfliteHelper.renderBoxes(size, _imageWidth, _imageHeight));
+    stackChildren.addAll(recognitions);
 
     return Stack(
       children: stackChildren,

@@ -86,7 +86,6 @@ class TfliteHelper {
       'imageHeight': null,
       'recognitions': [],
       'image': null,
-      'isLoading': true,
     };
 
     if (image == null) return null;
@@ -108,14 +107,13 @@ class TfliteHelper {
     FileImage(image)
         .resolve(ImageConfiguration())
         .addListener((ImageStreamListener((ImageInfo info, bool _) {
-          print('xxxx');
+          print('ImageStreamListener');
           print(info.image.width.toDouble().toString());
           _result['imageWidth'] = info.image.width.toDouble();
           _result['imageHeight'] = info.image.height.toDouble();
         })));
 
     _result['image'] = image;
-    _result['isLoading'] = false;
 
     return _result;
   }

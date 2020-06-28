@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rcs_mobile/common/tflite_helper.dart';
@@ -15,7 +17,7 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   TfliteHelper _tfliteHelper = TfliteHelper();
   var _predictedImage;
 
-  var _recognitions = [];
+  List<Widget> _recognitions = [];
 
   @override
   void initState() {
@@ -30,26 +32,31 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   }
 
   selectFromImagePicker() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final picker = ImagePicker();
+    final image = await picker.getImage(
+      source: ImageSource.gallery,
+    );
     if (image == null) return;
     setState(() {
       _isLoading = true;
     });
-    Size size = MediaQuery.of(context).size;
 
     setState(() {
-      _tfliteHelper.predictImage(image).then((value) {
-        _predictedImage = value;
-        _recognitions = _tfliteHelper.renderBoxes(size,
-            _predictedImage['imageWidth'], _predictedImage['imageHeight']);
+      print('image.path: ' + image.path);
+      _tfliteHelper.predictImage(File(image.path)).then((value) {
+        print(value);
+        _predictedImage = value['image'];
+        _recognitions = value['recognitions'];
         print(_predictedImage);
-        _isLoading = _predictedImage['isLoading'];
+        _isLoading = false;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(),
       body: (_isLoading == true)
@@ -60,7 +67,11 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
               children: <Widget>[
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.6,
-                  child: ProcessedImage(),
+                  child: ProcessedImage(
+                    recognitions: _recognitions,
+                    imgFile: _predictedImage,
+                    size: size,
+                  ),
                 ),
                 RaisedButton(
                   child: Text('Find nearest recycle centers'),
