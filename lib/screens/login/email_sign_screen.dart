@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
+import 'package:rcs_mobile/screens/login/login_screen.dart';
+
+import '../dashboard_screen.dart';
 
 class EmailSignScreen extends StatefulWidget {
   static const routeName = '/emailRegistration';
@@ -16,6 +20,8 @@ class _EmailSignScreenState extends State<EmailSignScreen> {
   String password = '';
 
   String passwordConfirmation = '';
+
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +119,37 @@ class _EmailSignScreenState extends State<EmailSignScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: FlatButton(
                               onPressed: () async {
-                                if (_formKey.currentState.validate()) {
-                                  print(email);
-                                  print(password);
-                                  print(passwordConfirmation);
+                                if (isSignIn) {
+                                  if (_formKey.currentState.validate()) {
+                                    dynamic result =
+                                    await signInWithEmailAndPassword(
+                                        email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        error = 'There have been a problem with those credentials.';
+                                      });
+                                    }
+                                    else {
+                                      Navigator.of(context).pushReplacementNamed(DashboardScreen.routeName);
+                                    }
+                                    FocusScope.of(context).unfocus();
+                                  }
+                                }
+                                else {
+                                  if (_formKey.currentState.validate()) {
+                                    dynamic result =
+                                    await registerWithEmailAndPassword(
+                                        email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        error = 'The email address is already in use by another account.';
+                                      });
+                                    }
+                                    else {
+                                      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                    }
+                                    FocusScope.of(context).unfocus();
+                                  }
                                 }
                               },
                               child: isSignIn
@@ -132,6 +165,10 @@ class _EmailSignScreenState extends State<EmailSignScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(error, style: TextStyle(color: Colors.red),)
                       ],
                     ),
                   ),

@@ -21,3 +21,40 @@ Future<FirebaseUser> signInWithGoogle() async {
 void signOut() => _auth.signOut();
 
 FirebaseUser checkUser() => (user.toString() == null ? user : null);
+
+Future registerWithEmailAndPassword(String email, String password) async {
+  try {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    FirebaseUser firebaseUser = result.user;
+    return firebaseUser;
+//  return _userFromFirebaseUser(firebaseUser);
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+Future signInWithEmailAndPassword(String email, String password) async {
+  try {
+    AuthResult result = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
+    FirebaseUser firebaseUser = result.user;
+    return firebaseUser;
+//  return _userFromFirebaseUser(firebaseUser);
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+
+//User _userFromFirebaseUser(FirebaseUser firebaseUser) {
+//  return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
+//}
+//
+//class User {
+//  final String uid;
+//
+//  User({this.uid});
+//}
