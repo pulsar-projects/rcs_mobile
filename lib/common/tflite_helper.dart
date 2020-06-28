@@ -64,9 +64,9 @@ class TfliteHelper {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-            color: blue,
-            width: 3,
-          )),
+                color: blue,
+                width: 3,
+              )),
           child: Text(
             "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%",
             style: TextStyle(
@@ -102,11 +102,11 @@ class TfliteHelper {
     FileImage(image)
         .resolve(ImageConfiguration())
         .addListener((ImageStreamListener((ImageInfo info, bool _) {
-          _result['imageWidth'] = info.image.width.toDouble();
-          _result['imageHeight'] = info.image.height.toDouble();
-          _result['image'] = info.image;
-          print('end of ImageStreamListener');
-        })));
+      _result['imageWidth'] = info.image.width.toDouble();
+      _result['imageHeight'] = info.image.height.toDouble();
+      _result['image'] = info.image;
+      print('end of ImageStreamListener');
+    })));
 
     return _result;
   }

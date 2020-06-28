@@ -40,15 +40,13 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
     if (imagePicker == null) return;
     final imageFile = File(imagePicker.path);
 
+    print('selectFromImagePicker image.path: ' + imageFile.path);
+    var results = await _tfliteHelper.predictImage(imageFile);
+
     setState(() {
-      print('selectFromImagePicker image.path: ' + imageFile.path);
-      _tfliteHelper.predictImage(imageFile).then((value) {
-        print(value);
-        _predictedImage = imageFile;
-        _recognitions = value['recognitions'];
-        _isLoading = false;
-        print(_predictedImage);
-      });
+      _predictedImage = imageFile;
+      _isLoading = false;
+      _recognitions = results['recognitions'];
     });
   }
 
@@ -62,21 +60,21 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
       appBar: AppBar(),
       body: (_isLoading == true)
           ? Center(
-              child: CircularProgressIndicator(),
-            )
+        child: CircularProgressIndicator(),
+      )
           : ListView(
-              children: <Widget>[
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  child: ProcessedImage(
-                    imgFile: _predictedImage,
-                    renderBoxes: _renderBoxes,
-                    size: size,
-                  ),
-                ),
-                RaisedButton(
-                  child: Text('Find nearest recycle centers'),
-                  textColor: Colors.white,
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: ProcessedImage(
+              imgFile: _predictedImage,
+              renderBoxes: _renderBoxes,
+              size: size,
+            ),
+          ),
+          RaisedButton(
+            child: Text('Find nearest recycle centers'),
+            textColor: Colors.white,
 //            onPressed: (_recognitions.length == 0)
 //                ? null
 //                : () {
@@ -88,22 +86,22 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
 //                      ),
 //                    );
 //                  },
-                  color: Colors.green,
-                ),
-                RaisedButton(
-                  child: Text('Load image from device'),
-                  onPressed: selectFromImagePicker,
-                  textColor: Colors.white,
-                  color: Colors.green,
-                ),
-                RaisedButton(
-                  child: Text('Take photo'),
-                  onPressed: null,
-                  textColor: Colors.white,
-                  color: Colors.green,
-                )
-              ],
-            ),
+            color: Colors.green,
+          ),
+          RaisedButton(
+            child: Text('Load image from device'),
+            onPressed: selectFromImagePicker,
+            textColor: Colors.white,
+            color: Colors.green,
+          ),
+          RaisedButton(
+            child: Text('Take photo'),
+            onPressed: null,
+            textColor: Colors.white,
+            color: Colors.green,
+          )
+        ],
+      ),
     );
   }
 }
