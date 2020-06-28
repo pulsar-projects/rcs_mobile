@@ -5,7 +5,7 @@ import 'package:rcs_mobile/common/tflite_helper.dart';
 
 class ProcessedImage extends StatelessWidget {
   final File imgFile;
-  final List<Widget> recognitions;
+  final recognitions;
   final Size size;
 
   ProcessedImage({

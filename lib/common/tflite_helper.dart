@@ -91,18 +91,13 @@ class TfliteHelper {
     if (image == null) return null;
 
     if (_model == yolo) {
-      var recognitions = await _yolov2Tiny(image);
-      _recognitions = recognitions;
-      _result['recognitions'] = _recognitions;
-
-      _recognitions = recognitions;
-      _result['recognitions'] = _recognitions;
+      _recognitions = await _yolov2Tiny(image);
+      print('end _yolov2Tiny');
     } else {
-      var recognitions = await _ssdMobileNet(image);
-
-      _recognitions = recognitions;
-      _result['recognitions'] = _recognitions;
+      _recognitions  = await _ssdMobileNet(image);
+      print('end _ssdMobileNet');
     }
+    _result['recognitions'] = _recognitions;
 
     FileImage(image)
         .resolve(ImageConfiguration())
@@ -111,9 +106,8 @@ class TfliteHelper {
           print(info.image.width.toDouble().toString());
           _result['imageWidth'] = info.image.width.toDouble();
           _result['imageHeight'] = info.image.height.toDouble();
+          _result['image'] = info.image;
         })));
-
-    _result['image'] = image;
 
     return _result;
   }
