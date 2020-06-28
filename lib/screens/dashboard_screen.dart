@@ -54,15 +54,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             pinned: true,
             actions: isShrink
                 ? <Widget>[
-                    FlatButton(
-                      onPressed: () {},
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                            'assets/sample/images/user-avatar.jpg'),
-                      ),
-                      shape: CircleBorder(
-                          side: BorderSide(color: Colors.transparent)),
-                    )
+                    AvatarFlatButton()
                   ]
                 : null,
             backgroundColor: isShrink ? Color(0xFF4D9F69) : Colors.transparent,
