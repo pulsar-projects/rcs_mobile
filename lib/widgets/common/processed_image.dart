@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rcs_mobile/common/tflite_helper.dart';
 
 class ProcessedImage extends StatelessWidget {
   final File imgFile;
@@ -16,7 +15,7 @@ class ProcessedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> stackChildren = [];
+    List<Widget> stackChildren = <Widget>[];
 
     stackChildren.add(Positioned(
       top: 0.0,
@@ -27,7 +26,7 @@ class ProcessedImage extends StatelessWidget {
           : Image.file(imgFile),
     ));
 
-    stackChildren.addAll(recognitions);
+    //stackChildren.addAll(recognitions);
 
     return Stack(
       children: stackChildren,

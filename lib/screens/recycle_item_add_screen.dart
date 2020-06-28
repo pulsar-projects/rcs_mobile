@@ -39,10 +39,10 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
     if (image == null) return;
 
     setState(() {
-      print('image.path: ' + image.path);
+      print('selectFromImagePicker image.path: ' + image.path);
       _tfliteHelper.predictImage(File(image.path)).then((value) {
         print(value);
-        _predictedImage = value['image'];
+        _predictedImage = image;
         _recognitions = value['recognitions'];
         _isLoading = false;
         print(_predictedImage);
