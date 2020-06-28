@@ -5,6 +5,7 @@ import 'package:rcs_mobile/screens/onboarding/onboarding_screen.dart';
 
 import 'screens/login/email_sign_up_screen.dart';
 import 'screens/onboarding/onboarding.dart';
+import 'package:rcs_mobile/screens/new_recycle.dart';
 
 void main() {
   runApp(RcsApp());
@@ -24,6 +25,7 @@ class RcsApp extends StatelessWidget {
           EmailSignUpScreen.routeName: (_) => EmailSignUpScreen(),
           LoginScreen.routeName: (_) => LoginScreen(),
           DashboardScreen.routeName: (_) => DashboardScreen(),
+          NewRecycleScreen.routeName: (_) => NewRecycleScreen()
         });
   }
 }
