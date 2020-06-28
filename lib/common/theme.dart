@@ -13,9 +13,9 @@ final ThemeData rcsTheme = ThemeData(
     surface: Color(0xFFbbedc4),//Color(0xFF202945),
     background: Color(0xFF19A765),
     error: Color(0xFF22975C),
-    onPrimary: Color(0x284730),
+    onPrimary: Color(0xFF284730),
     //0xFF85A4BD
-    onSecondary: Color(0x284730),
+    onSecondary: Color(0xFF284730),
     //0xFF85A4BD
     onSurface: Color(0xFFa6bfad),
     onBackground: Color(0xddebe0),

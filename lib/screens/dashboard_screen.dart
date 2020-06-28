@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       onPressed: () {},
                       child: CircleAvatar(
                         backgroundImage: AssetImage(
-                            'assets/sample/images/user-avatar-2.jpg'),
+                            'assets/sample/images/user-avatar.jpg'),
                       ),
                       shape: CircleBorder(
                           side: BorderSide(color: Colors.transparent)),
@@ -87,15 +87,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: CircleAvatar(
                         radius: 40,
                         backgroundImage: AssetImage(
-                            'assets/sample/images/user-avatar-2.jpg'),
+                            'assets/sample/images/user-avatar.jpg'),
                       ),
                     ),
-                    Text(
-                      'Warren Steele',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        'Irene Ford',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
                     ),
                     Stack(
                       children: <Widget>[
@@ -149,11 +152,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Container(
                       width: 300,
-                      //padding: EdgeInsets.only(top: 20),
                       child: TextField(
                         onChanged: (value) {
                           //TODO: implement search handler
@@ -199,7 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return SizedBox(
-                  height: 80,
+                  height: 140,
                   child: Padding(
                     padding: EdgeInsets.all(5),
                     child: Stack(
@@ -207,13 +209,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: <Widget>[
                         Positioned(
                           top: 0,
-                          left: 30,
+                          left: 25,
                           child: Container(
                             alignment: Alignment.centerLeft,
                             width: MediaQuery.of(context).size.width - 55,
-                            height: 60,
+                            height: 120,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 25),
+                              padding: EdgeInsets.only(left: 85),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -228,15 +230,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             .format(DateTime.now()),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white),
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFF19A765),
+                                        ),
                                       ),
                                       Text(
                                         'Your Item $index',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF284730),
+                                        ),
                                       ),
                                       Container(
                                         height: 3,
@@ -254,8 +258,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         'Item $index short description...',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w200,
-                                            color: Colors.white),
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF19A765),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -268,7 +273,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       },
                                       icon: Icon(
                                         Icons.more_vert,
-                                        color: Colors.white,
+                                        color: Color(0xFF19A765),
                                       ),
                                     ),
                                   ),
@@ -276,31 +281,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                             ),
                             decoration: BoxDecoration(
-                              color: Color(0xFF70b57c),
+                              color: Colors.white,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xFF70b57c).withOpacity(0.5),
-                                  spreadRadius: 5,
+                                  color: Color(0xFF70b57c).withOpacity(0.2),
+                                  spreadRadius: 2,
                                   blurRadius: 7,
                                   offset: Offset(
-                                      0, 3), // changes position of shadow
+                                      0, 2), // changes position of shadow
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Positioned(
-                          top: 10,
-                          left: 10,
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundImage:
-                                NetworkImage('https://via.placeholder.com/150'),
-                          ),
+                          top: 0,
+                          left: 25,
+                          child: Container(
+                              width: 80.0,
+                              height: 80.0,
+                              decoration: new BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20)),
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          'https://via.placeholder.com/80')))),
                         ),
                       ],
                     ),
@@ -315,18 +327,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.image),
         tooltip: "Pick Image from gallery",
-        onPressed:  () {
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  NewRecycleScreen(),
+              builder: (context) => NewRecycleScreen(),
             ),
           );
         },
         backgroundColor: Color(0xFF70b57c),
       ),
-
     );
   }
 }
