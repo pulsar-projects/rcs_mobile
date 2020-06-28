@@ -8,12 +8,13 @@ class RcsMap extends StatelessWidget {
   static const double _markerSize = 40.0;
   final List<RecycleCenter> recycleCenters;
   final LatLng currentLocation;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const RcsMap({this.recycleCenters, this.currentLocation});
+  const RcsMap({this.recycleCenters, this.currentLocation, this.scaffoldKey});
 
 
   List<Marker> getMarkers(List<RecycleCenter> recycleCenters) {
-
+    //final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     // add recycle centers
     List<Marker> markers = recycleCenters.map((rc) {
       return Marker(
@@ -21,13 +22,25 @@ class RcsMap extends StatelessWidget {
           height: _markerSize,
           point: LatLng(rc.latitude, rc.longitude),
           builder: (context) =>
-              Icon(
-                Icons.location_on,
-                color: Theme
-                    .of(context)
-                    .accentColor,
-                size: _markerSize,
-              ));
+              Container(
+                  child: GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState.showSnackBar(
+                            SnackBar(
+                                content: Text(rc.description),
+                        ));
+                      },
+                      child:
+                      Icon(
+                        Icons.add_location,
+                        color: Theme
+                            .of(context)
+                            .accentColor,
+                        size: _markerSize,
+                      )
+                  )
+              )
+      );
     }).toList();
 
     // add current location
@@ -37,7 +50,7 @@ class RcsMap extends StatelessWidget {
         point: currentLocation,
         builder: (context) =>
             Icon(
-              Icons.my_location,
+              Icons.location_on,
               color: Colors.redAccent,
               size: _markerSize,
             )
