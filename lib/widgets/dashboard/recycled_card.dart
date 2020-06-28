@@ -1,5 +1,7 @@
-import 'package:intl/intl.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
 import 'package:rcs_mobile/screens/recycle_item_detail_screen.dart';
 
@@ -89,7 +91,8 @@ class RecycledCard extends StatelessWidget {
                         child: IconButton(
                           tooltip: 'Item details',
                           onPressed: () {
-                            print('recycledItem.id = ' + recycledItem.id.toString());
+                            print('recycledItem.id = ' +
+                                recycledItem.id.toString());
                             Navigator.of(context).pushNamed(
                                 RecycleItemDetailScreen.routeName,
                                 arguments: recycledItem.id);
@@ -126,19 +129,24 @@ class RecycledCard extends StatelessWidget {
             Positioned(
               top: 0,
               left: 25,
-              child: Container(
-                width: 80.0,
-                height: 80.0,
-                decoration: new BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
-                  image: new DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage('https://via.placeholder.com/80'),
-                  ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
                 ),
+                child: recycledItem.imagePath != null
+                    ? Image.file(
+                        File(recycledItem.imagePath),
+                        width: 80.0,
+                        height: 80.0,
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        'https://via.placeholder.com/80',
+                        width: 80.0,
+                        height: 80.0,
+                        fit: BoxFit.fill,
+                      ),
               ),
             ),
           ],
