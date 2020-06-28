@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rcs_mobile/widgets/index.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const routeName = '/dashboard';
@@ -56,8 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     FlatButton(
                       onPressed: () {},
                       child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                            'assets/sample/images/user-avatar-2.jpg'),
+                        backgroundImage: NetworkImage(imageUrl),
                       ),
                       shape: CircleBorder(
                           side: BorderSide(color: Colors.transparent)),
@@ -85,12 +85,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       child: CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage(
-                            'assets/sample/images/user-avatar-2.jpg'),
+                        backgroundImage: NetworkImage(imageUrl),
+//                        backgroundImage: AssetImage(
+//                            'assets/sample/images/user-avatar-2.jpg'),
                       ),
                     ),
                     Text(
-                      'Warren Steele',
+                      name,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

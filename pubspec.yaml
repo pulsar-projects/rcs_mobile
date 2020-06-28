@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   google_sign_in: ^4.5.1
   firebase_auth: ^0.16.1
+  shared_preferences: ^0.5.7+3
+  after_layout: ^1.0.7+2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -52,6 +54,10 @@ flutter:
   assets:
     - assets/sample/images/
     - assets/google_logo.png
+    - assets/onboarding/onboarding-1.png
+    - assets/onboarding/onboarding-2.png
+    - assets/onboarding/onboarding-3.png
+    - assets/onboarding/onboarding-4.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

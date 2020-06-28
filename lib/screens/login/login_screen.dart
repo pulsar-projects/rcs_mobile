@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
 import 'package:rcs_mobile/common/sign_in.dart';
 import 'package:rcs_mobile/screens/onboarding/onboarding_screen.dart';
 import 'package:rcs_mobile/widgets/sign_in_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'email_sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -23,9 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FittedBox(
-                  child: Image.asset('assets/onboarding/onboarding-1.png')),
-              SizedBox(height: 50),
+              Image.asset('assets/onboarding/onboarding-1.png'),
               SignInButton(
                 context: context,
                 onPressedFunction: () {
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SignInButton(
                 context: context,
                 onPressedFunction: () {
-                  Navigator.of(context).pushNamed(EmailRegistrationScreen.routeName);
+                  Navigator.of(context).pushNamed(EmailSignUpScreen.routeName);
                 },
                 iconImage: Icon(
                   Icons.mail,
