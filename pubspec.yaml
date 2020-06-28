@@ -28,6 +28,8 @@ dependencies:
   image: ^2.1.4
   google_sign_in: ^4.5.1
   firebase_auth: ^0.16.1
+  shared_preferences: ^0.5.7+3
+  after_layout: ^1.0.7+2
   flutter_map: any
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,6 +61,12 @@ flutter:
     - assets/tflite/yolov2_tiny.tflite
     - assets/tflite/yolov2_tiny.txt
     - assets/google_logo.png
+    - assets/onboarding/onboarding-1.png
+    - assets/onboarding/onboarding-2.png
+    - assets/onboarding/onboarding-3.png
+    - assets/onboarding/onboarding-4.png
+    - assets/logo.png
+    - assets/leafs.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
