@@ -10,7 +10,7 @@ class UserDetails extends StatelessWidget {
     return Text(
       'Irene Ford',
       style: TextStyle(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondaryVariant,
           fontWeight: FontWeight.bold,
           fontSize: 20),
     );

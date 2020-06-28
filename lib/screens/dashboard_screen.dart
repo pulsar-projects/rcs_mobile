@@ -52,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SliverAppBar(
             pinned: true,
             actions: isShrink ? <Widget>[AvatarFlatButton()] : null,
-            backgroundColor: isShrink ? Color(0xFF4D9F69) : Colors.transparent,
+            backgroundColor: isShrink ? Theme.of(context).colorScheme.surface : Colors.transparent,
             elevation: 4,
             expandedHeight: Platform.isIOS
                 ? (MediaQuery.of(context).size.height) * 0.35
@@ -63,7 +63,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     top: (MediaQuery.of(context).size.height) * 0.1),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color(0xFF50AE72),
+                  color: Theme.of(context).colorScheme.primaryVariant,
                   shape: BoxShape.rectangle,
                   borderRadius:
                       const BorderRadius.only(bottomLeft: Radius.circular(50)),

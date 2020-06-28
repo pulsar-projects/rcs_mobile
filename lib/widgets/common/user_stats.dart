@@ -11,7 +11,7 @@ class UserStats extends StatelessWidget {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            color: Color(0xFF499763).withOpacity(0.5),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(
               Radius.circular(15),
@@ -26,7 +26,7 @@ class UserStats extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               )),
           height: 35,
@@ -34,7 +34,7 @@ class UserStats extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Color(0xFF499763),
+            color: Theme.of(context).colorScheme.primary,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(
               Radius.circular(15),
@@ -49,7 +49,7 @@ class UserStats extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),

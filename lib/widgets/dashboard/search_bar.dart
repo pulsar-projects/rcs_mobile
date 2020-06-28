@@ -40,7 +40,7 @@ class SearchBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Color(0xFFbbedc4).withOpacity(0.5),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
             spreadRadius: 1,
             blurRadius: 7,
             offset: Offset(0, 3), // changes position of shadow

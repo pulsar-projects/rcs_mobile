@@ -40,7 +40,7 @@ class RecycledCard extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.w300,
-                              color: Color(0xFF19A765),
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                           Text(
@@ -48,14 +48,14 @@ class RecycledCard extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF284730),
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                           Container(
                             height: 3,
                             width: 100,
                             decoration: BoxDecoration(
-                              color: Color(0xFFbbedc4),
+                              color: Theme.of(context).colorScheme.primaryVariant,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(3),
@@ -68,7 +68,7 @@ class RecycledCard extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              color: Color(0xFF19A765),
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           )
                         ],
@@ -82,7 +82,7 @@ class RecycledCard extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.more_vert,
-                            color: Color(0xFF19A765),
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ),
@@ -90,14 +90,14 @@ class RecycledCard extends StatelessWidget {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondaryVariant,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF70b57c).withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 7,
                       offset: Offset(0, 2), // changes position of shadow

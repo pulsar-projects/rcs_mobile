@@ -9,7 +9,7 @@ class PickImageActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      child: Icon(Icons.image),
+      child: Icon(Icons.image, color: Theme.of(context).colorScheme.secondaryVariant,),
       tooltip: "Pick Image from gallery",
       onPressed: () {
         Navigator.push(
@@ -19,7 +19,7 @@ class PickImageActionButton extends StatelessWidget {
           ),
         );
       },
-      backgroundColor: Color(0xFF70b57c),
+      backgroundColor: Theme.of(context).colorScheme.primary,
     );
   }
 }
