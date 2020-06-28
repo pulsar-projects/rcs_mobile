@@ -38,7 +38,35 @@ class RecycledItemsProvider with ChangeNotifier {
 //    this._recycledItems,
 //  );
 
-  List<RecycledItem> get getRecycledItems {
+  List<RecycledItem> get getItems {
     return [..._recycledItems];
+  }
+
+  RecycledItem getItemById(String id) {
+    return [..._recycledItems].firstWhere((element) => element.id == id);
+  }
+
+  String addItem(RecycledItem recycledItem) {
+    final newItemId = recycledItem.id;
+    if (!_recycledItems.contains(recycledItem)) {
+      _recycledItems.add(recycledItem);
+      return newItemId;
+    } else {
+      return null;
+    }
+  }
+
+  RecycledItem updateItem(String itemId, RecycledItem newRecycledItem) {
+    RecycledItem oldRecycledItem = _recycledItems.firstWhere((element) => element.id == itemId);
+    _recycledItems[_recycledItems.indexOf(oldRecycledItem)] = newRecycledItem;
+    return newRecycledItem;
+  }
+
+  String deleteItem(String itemId) {
+    final existingItemIndex =
+        _recycledItems.indexWhere((element) => element.id == itemId);
+    var existingItem = _recycledItems[existingItemIndex];
+    _recycledItems.removeAt(existingItemIndex);
+    return existingItem.id;
   }
 }

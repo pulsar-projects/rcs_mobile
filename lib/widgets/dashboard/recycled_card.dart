@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
+import 'package:rcs_mobile/screens/recycle_item_detail_screen.dart';
 
 class RecycledCard extends StatelessWidget {
   final RecycledItem recycledItem;
@@ -60,7 +61,8 @@ class RecycledCard extends StatelessWidget {
                             height: 3,
                             width: 100,
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primaryVariant,
+                              color:
+                                  Theme.of(context).colorScheme.primaryVariant,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(3),
@@ -87,7 +89,10 @@ class RecycledCard extends StatelessWidget {
                         child: IconButton(
                           tooltip: 'Item details',
                           onPressed: () {
-                            //TODO: implement handler
+                            print('recycledItem.id = ' + recycledItem.id.toString());
+                            Navigator.of(context).pushNamed(
+                                RecycleItemDetailScreen.routeName,
+                                arguments: recycledItem.id);
                           },
                           icon: Icon(
                             Icons.more_vert,
@@ -106,7 +111,10 @@ class RecycledCard extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.2),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryVariant
+                          .withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 7,
                       offset: Offset(0, 2), // changes position of shadow
@@ -119,17 +127,19 @@ class RecycledCard extends StatelessWidget {
               top: 0,
               left: 25,
               child: Container(
-                  width: 80.0,
-                  height: 80.0,
-                  decoration: new BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
-                      image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image:
-                              NetworkImage('https://via.placeholder.com/80')))),
+                width: 80.0,
+                height: 80.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
+                  image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage('https://via.placeholder.com/80'),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

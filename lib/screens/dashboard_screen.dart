@@ -92,10 +92,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   return RecycledCard(
-                    recycledItem: recycledItemsProvider.getRecycledItems[index],
+                    recycledItem: recycledItemsProvider.getItems[index],
                   );
                 },
-                childCount: recycledItemsProvider.getRecycledItems.length,
+                childCount: recycledItemsProvider.getItems.length,
               ),
             ),
           ),
