@@ -26,7 +26,7 @@ class ProcessedImage extends StatelessWidget {
           : Image.file(imgFile),
     ));
 
-    //stackChildren.addAll(recognitions);
+    stackChildren.addAll(recognitions);
 
     return Stack(
       children: stackChildren,
