@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
@@ -20,65 +21,80 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-//        color: Theme.of(context).colorScheme.surface,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/logo.png'),
-              SignButton(
-                context: context,
-                onPressedFunction: () {
-                  signInWithGoogle().whenComplete(() {
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/logo.png'),
+                SignButton(
+                  context: context,
+                  onPressedFunction: () async {
+                    await signInWithGoogle();
                     Navigator.of(context)
                         .pushReplacementNamed(DashboardScreen.routeName);
-                  });
-                },
-                iconImage: Image(
-                    image: AssetImage("assets/google_logo.png"), height: 35.0),
-                text: 'Sign in with Google',
-              ),
-              SignButton(
-                context: context,
-                onPressedFunction: () {
-                  Navigator.of(context).pushNamed(EmailSignScreen.routeName, arguments: {'title': "Sign In with Email", 'isSignIn': true});
-                },
-                iconImage: Icon(
-                  Icons.mail,
-                  size: 35,
-                  color: Colors.black54,
+                  },
+                  iconImage: Image(
+                      image: AssetImage("assets/google_logo.png"), height: 35.0),
+                  text: 'Sign in with Google',
                 ),
-                text: "Sign in with Email",
-              ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(EmailSignScreen.routeName, arguments: {'title': "Sign Up with Email", 'isSignIn': false});
-                },
-                child: Text("Sign Up with Email",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),),
-              ),
-              RaisedButton(
-                child: Text("View onboarding again (JUST FOR DEV)"),
-                onPressed: () async {
+                SignButton(
+                  context: context,
+                  onPressedFunction: () {
+                    Navigator.of(context).pushNamed(EmailSignScreen.routeName,
+                        arguments: {
+                          'title': "Sign In with Email",
+                          'isSignIn': true
+                        });
+                  },
+                  iconImage: Icon(
+                    Icons.mail,
+                    size: 35,
+                    color: Colors.black54,
+                  ),
+                  text: "Sign in with Email",
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(EmailSignScreen.routeName,
+                        arguments: {
+                          'title': "Sign Up with Email",
+                          'isSignIn': false
+                        });
+                  },
+                  child: Text(
+                    "Sign Up with Email",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  child: Text("View onboarding again (JUST FOR DEV)"),
+                  onPressed: () async {
 //                  SharedPreferences preferences =
 //                      await SharedPreferences.getInstance();
 //                  await preferences.setBool('seen', false);
-                  Navigator.pushReplacementNamed(
-                      context, OnboardingScreen.routeName);
-                },
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Image.asset('assets/leafs.png',),
-                ],
-              )
-            ],
+                    Navigator.pushReplacementNamed(
+                        context, OnboardingScreen.routeName);
+                  },
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: Image.asset(
+                        'assets/leafs.png',
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
