@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
+import 'package:rcs_mobile/screens/login/login_screen.dart';
 
 class RcsDrawer extends StatelessWidget {
   const RcsDrawer({
@@ -37,6 +39,24 @@ class RcsDrawer extends StatelessWidget {
             ),
             onTap: () {
               //TODO: implement handler
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+            title: Text(
+              'Log out',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w300,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ),
+            onTap: () {
+              signOutGoogle();
+              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
             },
           ),
         ],
