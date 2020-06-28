@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rcs_mobile/common/tflite_helper.dart';
 import 'package:rcs_mobile/widgets/common/index.dart';
+import 'package:rcs_mobile/screens/recycle_centers.dart';
 
 class RecycleItemAddScreen extends StatefulWidget {
   static const routeName = '/recycle-item-add';
@@ -75,17 +76,17 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
                 RaisedButton(
                   child: Text('Find nearest recycle centers'),
                   textColor: Colors.white,
-//            onPressed: (_recognitions.length == 0)
-//                ? null
-//                : () {
-//                    Navigator.push(
-//                      context,
-//                      MaterialPageRoute(
-//                        builder: (context) =>
-//                            RecycleCentersMap(recognitions: _recognitions),
-//                      ),
-//                    );
-//                  },
+                  onPressed: (_recognitions.length == 0)
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RecycleCentersMap(recognitions: _recognitions),
+                            ),
+                          );
+                        },
                   color: Colors.green,
                 ),
                 RaisedButton(
