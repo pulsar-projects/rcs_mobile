@@ -85,11 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: Image.asset(
-                        'assets/leafs.png',
-                      ),
+                    Image.asset(
+                      'assets/leafs.png',
                     ),
                   ],
                 )

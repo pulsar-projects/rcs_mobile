@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class EmailSignScreen extends StatelessWidget {
+class EmailSignScreen extends StatefulWidget {
   static const routeName = '/emailRegistration';
-  final _formKey = GlobalKey<FormState>();
+
+  @override
+  _EmailSignScreenState createState() => _EmailSignScreenState();
+}
+
+class _EmailSignScreenState extends State<EmailSignScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  String email = '';
+
+  String password = '';
+
+  String passwordConfirmation = '';
 
   @override
   Widget build(BuildContext context) {
@@ -53,30 +65,31 @@ class EmailSignScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
-                          cursorColor: cursorColor,
-                          decoration: const InputDecoration(
-                              labelText: "Enter your email",
-                              labelStyle: textFormFieldStyle,
-                              focusedBorder: underlineBorder),
-                          validator: (value) {
-                            value.isEmpty
-                                ? "Please enter an email" //TODO: add email validation
-                                : null;
-                          },
-                        ),
+                            keyboardType: TextInputType.emailAddress,
+                            cursorColor: cursorColor,
+                            decoration: const InputDecoration(
+                                labelText: "Enter your email",
+                                labelStyle: textFormFieldStyle,
+                                focusedBorder: underlineBorder),
+                            validator: (value) => value.isEmpty
+                                ? "Please enter an email"
+                                : validateEmail(value),
+                            onChanged: (val) {
+                              setState(() => email = val);
+                            }),
                         TextFormField(
-                          cursorColor: cursorColor,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: "Enter a password",
-                              labelStyle: textFormFieldStyle,
-                              focusedBorder: underlineBorder),
-                          validator: (value) {
-                            value.isEmpty
-                                ? "Please enter a password" //TODO: add password validation
-                                : null;
-                          },
-                        ),
+                            cursorColor: cursorColor,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                                labelText: "Enter a password",
+                                labelStyle: textFormFieldStyle,
+                                focusedBorder: underlineBorder),
+                            validator: (value) => value.length < 6
+                                ? "Please enter a password with 6+ characters"
+                                : null,
+                            onChanged: (val) {
+                              setState(() => password = val);
+                            }),
                         isSignIn
                             ? Container()
                             : TextFormField(
@@ -86,19 +99,24 @@ class EmailSignScreen extends StatelessWidget {
                                     labelText: "Confirm your password",
                                     labelStyle: textFormFieldStyle,
                                     focusedBorder: underlineBorder),
-                                validator: (value) {
-                                  value.isEmpty
-                                      ? "Please confirm your password" //TODO: add password validation
-                                      : null;
+                                validator: (value) => value.isEmpty
+                                    ? "Please enter a password with 6+ characters"
+                                    : value != password
+                                        ? "The passwords don't match"
+                                        : null,
+                                onChanged: (val) {
+                                  setState(() => passwordConfirmation = val);
                                 },
                               ),
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: FlatButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState.validate()) {
-                                  //do something
+                                  print(email);
+                                  print(password);
+                                  print(passwordConfirmation);
                                 }
                               },
                               child: isSignIn
@@ -131,5 +149,15 @@ class EmailSignScreen extends StatelessWidget {
       text,
       style: TextStyle(color: Colors.white),
     );
+  }
+
+  validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else
+      return null;
   }
 }
