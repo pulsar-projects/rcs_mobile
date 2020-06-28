@@ -14,7 +14,7 @@ Future<FirebaseUser> signInWithGoogle() async {
   final authResult = await _auth.signInWithCredential(credential);
 
   print("signInWithGoogle " + "${authResult.user.displayName}");
-
+  user = authResult.user;
   return authResult.user;
 }
 
@@ -40,6 +40,7 @@ Future signInWithEmailAndPassword(String email, String password) async {
     AuthResult result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser firebaseUser = result.user;
+    user = firebaseUser;
     return firebaseUser;
 //  return _userFromFirebaseUser(firebaseUser);
   } catch (e) {
