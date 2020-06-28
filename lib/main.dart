@@ -6,7 +6,7 @@ import 'package:rcs_mobile/providers/recycle_center_provider.dart';
 import 'package:rcs_mobile/providers/recycled_items_provider.dart';
 import 'package:rcs_mobile/screens/login_screen.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
-import 'package:rcs_mobile/screens/new_recycle.dart';
+import 'package:rcs_mobile/screens/recycle_item_add_screen.dart';
 import 'package:rcs_mobile/screens/recycle_item_detail_screen.dart';
 
 void main() {
@@ -28,7 +28,7 @@ class RcsApp extends StatelessWidget {
           routes: {
             LoginScreen.routeName: (_) => LoginScreen(),
             DashboardScreen.routeName: (_) => DashboardScreen(),
-            NewRecycleScreen.routeName: (_) => NewRecycleScreen(),
+            RecycleItemAddScreen.routeName: (_) => RecycleItemAddScreen(),
             RecycleItemDetailScreen.routeName: (_) => RecycleItemDetailScreen(),
           }),
     );

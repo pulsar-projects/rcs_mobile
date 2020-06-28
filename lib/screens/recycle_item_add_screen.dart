@@ -1,25 +1,22 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rcs_mobile/screens/recycle_centers.dart';
-import 'package:rcs_mobile/widgets/dashboard/index.dart';
 import 'package:flutter/services.dart';
-import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
+import 'package:rcs_mobile/screens/recycle_centers.dart';
+import 'package:tflite/tflite.dart';
 
 const String ssd = "SSD MobileNet";
 const String yolo = "Tiny YOLOv2";
 
-
-class NewRecycleScreen extends StatefulWidget {
-  static const routeName = '/newRecycleScreen';
+class RecycleItemAddScreen extends StatefulWidget {
+  static const routeName = '/recycle-item-add';
 
   @override
-  _NewRecycleScreenState createState() => _NewRecycleScreenState();
+  _RecycleItemAddScreenState createState() => _RecycleItemAddScreenState();
 }
 
-class _NewRecycleScreenState extends State<NewRecycleScreen> {
+class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   // Borrowed Heavily from https://github.com/iampawan/TFLite-Flutter
 
   String _model = yolo;
@@ -85,11 +82,11 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
     FileImage(image)
         .resolve(ImageConfiguration())
         .addListener((ImageStreamListener((ImageInfo info, bool _) {
-      setState(() {
-        _imageWidth = info.image.width.toDouble();
-        _imageHeight = info.image.height.toDouble();
-      });
-    })));
+          setState(() {
+            _imageWidth = info.image.width.toDouble();
+            _imageHeight = info.image.height.toDouble();
+          });
+        })));
 
     setState(() {
       _image = image;
@@ -137,9 +134,9 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                color: blue,
-                width: 3,
-              )),
+            color: blue,
+            width: 3,
+          )),
           child: Text(
             "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%",
             style: TextStyle(
@@ -164,9 +161,10 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
       top: 0.0,
       left: 0.0,
       width: size.width,
-      child: _image == null ? Card(child: Text("No Image Selected")) : Image.file(_image),
-    )
-    );
+      child: _image == null
+          ? Card(child: Text("No Image Selected"))
+          : Image.file(_image),
+    ));
 
     stackChildren.addAll(renderBoxes(size));
 
@@ -181,40 +179,40 @@ class _NewRecycleScreenState extends State<NewRecycleScreen> {
       body: ListView(
         children: <Widget>[
           SizedBox(
-            height: MediaQuery.of(context).size.height*0.6,
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Stack(
-            children: stackChildren,
-        ),
+              children: stackChildren,
+            ),
           ),
-          RaisedButton
-            (
+          RaisedButton(
             child: Text('Find nearest recycle centers'),
             textColor: Colors.white,
-            onPressed: (_recognitions.length == 0) ? null : () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      RecycleCentersMap(recognitions: _recognitions),
-                ),
-              );
-            },
+            onPressed: (_recognitions.length == 0)
+                ? null
+                : () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            RecycleCentersMap(recognitions: _recognitions),
+                      ),
+                    );
+                  },
             color: Colors.green,
           ),
-          RaisedButton
-            (
+          RaisedButton(
             child: Text('Load image from device'),
             onPressed: selectFromImagePicker,
             textColor: Colors.white,
             color: Colors.green,
           ),
-          RaisedButton
-            (
+          RaisedButton(
             child: Text('Take photo'),
             onPressed: null,
             textColor: Colors.white,
             color: Colors.green,
-          )],
+          )
+        ],
       ),
     );
   }

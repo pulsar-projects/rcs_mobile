@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:rcs_mobile/model/recycle_center.dart';
+import 'package:rcs_mobile/model/recycle_center_model.dart';
 
 class RcsMap extends StatelessWidget {
 

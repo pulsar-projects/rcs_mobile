@@ -6,7 +6,6 @@ class RecycleCenter {
   final double latitude;
   final double longitude;
 
-
   RecycleCenter({
     @required this.id,
     @required this.description,
