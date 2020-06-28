@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tflite: ^1.0.4
+  tflite: ^1.0.6
   image_picker: ^0.6.1+8
   image: ^2.1.4
   google_sign_in: ^4.5.1
