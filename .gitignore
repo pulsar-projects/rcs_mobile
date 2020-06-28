@@ -45,6 +45,7 @@ app.*.map.json
 
 # Project specific
 **/credentials
+android/app/google-services.json
 
 # Developer specific
 ios/Runner.xcodeproj/project.pbxproj

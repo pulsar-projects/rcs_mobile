@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:rcs_mobile/model/recycle_center.dart';
+import 'package:rcs_mobile/model/recycle_center_model.dart';
 
 class RecycleCentersProvider with ChangeNotifier {
   final String _userId = '_userId';

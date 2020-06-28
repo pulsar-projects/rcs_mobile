@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:rcs_mobile/model/recycle_center.dart';
+import 'package:rcs_mobile/model/recycle_center_model.dart';
 
 class RcsMap extends StatelessWidget {
 
@@ -13,7 +13,7 @@ class RcsMap extends StatelessWidget {
   const RcsMap({this.recycleCenters, this.currentLocation, this.scaffoldKey});
 
 
-  List<Marker> getMarkers(List<RecycleCenter> recycleCenters) {
+  List<Marker> getMarkers(BuildContext context, List<RecycleCenter> recycleCenters) {
     //final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     // add recycle centers
     List<Marker> markers = recycleCenters.map((rc) {
@@ -27,7 +27,8 @@ class RcsMap extends StatelessWidget {
                       onTap: () {
                         scaffoldKey.currentState.showSnackBar(
                             SnackBar(
-                                content: Text(rc.description),
+
+                                content: markerDetail(context, rc),
                         ));
                       },
                       child:
@@ -60,6 +61,27 @@ class RcsMap extends StatelessWidget {
     return markers;
   }
 
+  Widget markerDetail(BuildContext context, RecycleCenter rc){
+
+    return Container(
+      height: MediaQuery.of(context).size.height*0.5,
+      child: ListView(
+        children: <Widget>[
+          Text(rc.description),
+          RaisedButton(
+            textColor: Colors.white,
+            color: Colors.green,
+            child: Text('Pick Center'),
+            onPressed: () {
+              Navigator.pop(context, rc);
+            },
+          )
+        ],
+      ),
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
@@ -77,7 +99,7 @@ class RcsMap extends StatelessWidget {
           subdomains: ['a', 'b', 'c'],
           backgroundColor: Theme.of(context).colorScheme.surface,
         ),
-        MarkerLayerOptions(markers: getMarkers(recycleCenters))
+        MarkerLayerOptions(markers: getMarkers(context, recycleCenters))
       ],
     );
   }

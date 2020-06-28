@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
+import 'package:rcs_mobile/screens/login/login_screen.dart';
 
-class EmailSignScreen extends StatelessWidget {
+import '../dashboard_screen.dart';
+
+class EmailSignScreen extends StatefulWidget {
   static const routeName = '/emailRegistration';
-  final _formKey = GlobalKey<FormState>();
+
+  @override
+  _EmailSignScreenState createState() => _EmailSignScreenState();
+}
+
+class _EmailSignScreenState extends State<EmailSignScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  String email = '';
+
+  String password = '';
+
+  String passwordConfirmation = '';
+
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -53,30 +71,31 @@ class EmailSignScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
-                          cursorColor: cursorColor,
-                          decoration: const InputDecoration(
-                              labelText: "Enter your email",
-                              labelStyle: textFormFieldStyle,
-                              focusedBorder: underlineBorder),
-                          validator: (value) {
-                            value.isEmpty
-                                ? "Please enter an email" //TODO: add email validation
-                                : null;
-                          },
-                        ),
+                            keyboardType: TextInputType.emailAddress,
+                            cursorColor: cursorColor,
+                            decoration: const InputDecoration(
+                                labelText: "Enter your email",
+                                labelStyle: textFormFieldStyle,
+                                focusedBorder: underlineBorder),
+                            validator: (value) => value.isEmpty
+                                ? "Please enter an email"
+                                : validateEmail(value),
+                            onChanged: (val) {
+                              setState(() => email = val);
+                            }),
                         TextFormField(
-                          cursorColor: cursorColor,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: "Enter a password",
-                              labelStyle: textFormFieldStyle,
-                              focusedBorder: underlineBorder),
-                          validator: (value) {
-                            value.isEmpty
-                                ? "Please enter a password" //TODO: add password validation
-                                : null;
-                          },
-                        ),
+                            cursorColor: cursorColor,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                                labelText: "Enter a password",
+                                labelStyle: textFormFieldStyle,
+                                focusedBorder: underlineBorder),
+                            validator: (value) => value.length < 6
+                                ? "Please enter a password with 6+ characters"
+                                : null,
+                            onChanged: (val) {
+                              setState(() => password = val);
+                            }),
                         isSignIn
                             ? Container()
                             : TextFormField(
@@ -86,19 +105,51 @@ class EmailSignScreen extends StatelessWidget {
                                     labelText: "Confirm your password",
                                     labelStyle: textFormFieldStyle,
                                     focusedBorder: underlineBorder),
-                                validator: (value) {
-                                  value.isEmpty
-                                      ? "Please confirm your password" //TODO: add password validation
-                                      : null;
+                                validator: (value) => value.isEmpty
+                                    ? "Please enter a password with 6+ characters"
+                                    : value != password
+                                        ? "The passwords don't match"
+                                        : null,
+                                onChanged: (val) {
+                                  setState(() => passwordConfirmation = val);
                                 },
                               ),
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: FlatButton(
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  //do something
+                              onPressed: () async {
+                                if (isSignIn) {
+                                  if (_formKey.currentState.validate()) {
+                                    dynamic result =
+                                    await signInWithEmailAndPassword(
+                                        email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        error = 'There have been a problem with those credentials.';
+                                      });
+                                    }
+                                    else {
+                                      Navigator.of(context).pushReplacementNamed(DashboardScreen.routeName);
+                                    }
+                                    FocusScope.of(context).unfocus();
+                                  }
+                                }
+                                else {
+                                  if (_formKey.currentState.validate()) {
+                                    dynamic result =
+                                    await registerWithEmailAndPassword(
+                                        email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        error = 'The email address is already in use by another account.';
+                                      });
+                                    }
+                                    else {
+                                      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                    }
+                                    FocusScope.of(context).unfocus();
+                                  }
                                 }
                               },
                               child: isSignIn
@@ -114,6 +165,10 @@ class EmailSignScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(error, style: TextStyle(color: Colors.red),)
                       ],
                     ),
                   ),
@@ -131,5 +186,15 @@ class EmailSignScreen extends StatelessWidget {
       text,
       style: TextStyle(color: Colors.white),
     );
+  }
+
+  validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else
+      return null;
   }
 }

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
 import 'package:rcs_mobile/providers/recycled_items_provider.dart';
+import 'package:rcs_mobile/widgets/common/index.dart';
 
 class RecycleItemDetailScreen extends StatefulWidget {
   static const routeName = '/recycle-item-detail';
@@ -15,6 +18,19 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
   final _descriptionFocusNode = FocusNode();
 
   final _form = GlobalKey<FormState>();
+  File _pickedImage;
+
+  void _onSelectedImage(File pickedImage) {
+    _pickedImage = pickedImage;
+    _editedItem = RecycledItem(
+      id: _editedItem.id,
+      name: _editedItem.name,
+      description: _editedItem.description,
+      dateTime: _editedItem.dateTime,
+      image: _pickedImage,
+      imagePath: _pickedImage.path,
+    );
+  }
 
   var _editedItem = RecycledItem(
     id: DateTime.now().toIso8601String(),
@@ -128,6 +144,8 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
                     name: value,
                     description: _editedItem.description,
                     dateTime: _editedItem.dateTime,
+                    image: _editedItem.image,
+                    imagePath: _editedItem.imagePath,
                   );
                 },
               ),
@@ -150,8 +168,14 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
                     name: _editedItem.name,
                     description: value,
                     dateTime: _editedItem.dateTime,
+                    image: _editedItem.image,
+                    imagePath: _editedItem.imagePath,
                   );
                 },
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: TakePhoto(_onSelectedImage),
               ),
             ],
           ),
