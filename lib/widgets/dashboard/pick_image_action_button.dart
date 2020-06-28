@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rcs_mobile/screens/new_recycle.dart';
+import 'package:rcs_mobile/screens/recycle_item_add_screen.dart';
 
 class PickImageActionButton extends StatelessWidget {
   const PickImageActionButton({
@@ -15,7 +15,7 @@ class PickImageActionButton extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NewRecycleScreen(),
+            builder: (context) => RecycleItemAddScreen(),
           ),
         );
       },

@@ -57,6 +57,7 @@ class RecycledItemsProvider with ChangeNotifier {
   }
 
   RecycledItem updateItem(String itemId, RecycledItem newRecycledItem) {
+    print('image path: ' + newRecycledItem.imagePath);
     RecycledItem oldRecycledItem = _recycledItems.firstWhere((element) => element.id == itemId);
     _recycledItems[_recycledItems.indexOf(oldRecycledItem)] = newRecycledItem;
     return newRecycledItem;
