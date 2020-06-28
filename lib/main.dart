@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rcs_mobile/common/theme.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
+import 'package:rcs_mobile/providers/recycle_center_provider.dart';
 import 'package:rcs_mobile/providers/recycled_items_provider.dart';
 import 'package:rcs_mobile/screens/login_screen.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
@@ -18,6 +19,7 @@ class RcsApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RecycledItemsProvider()),
+        ChangeNotifierProvider(create: (_) => RecycleCentersProvider())
       ],
       child: MaterialApp(
           title: 'RCS App',

@@ -1,35 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:rcs_mobile/model/recycle_center.dart';
 
 class RcsMap extends StatelessWidget {
 
   static const double _markerSize = 40.0;
-  final List locations;
-  //final dynamic query;
+  final List<RecycleCenter> recycleCenters;
+  final LatLng currentLocation;
 
-  const RcsMap({this.locations});
+  const RcsMap({this.recycleCenters, this.currentLocation});
 
 
-  List<Marker> getMarkers(List locations) {
-    return locations.map((loc) {
+  List<Marker> getMarkers(List<RecycleCenter> recycleCenters) {
+
+    // add recycle centers
+    List<Marker> markers = recycleCenters.map((rc) {
       return Marker(
           width: _markerSize,
           height: _markerSize,
-          point: loc,
-          builder: (context) => Icon(
-        Icons.location_on,
-        color: Theme.of(context).accentColor,
-        size: _markerSize,
-      ));
+          point: LatLng(rc.latitude, rc.longitude),
+          builder: (context) =>
+              Icon(
+                Icons.location_on,
+                color: Theme
+                    .of(context)
+                    .accentColor,
+                size: _markerSize,
+              ));
     }).toList();
+
+    // add current location
+    markers.add(Marker(
+        width: _markerSize,
+        height: _markerSize,
+        point: currentLocation,
+        builder: (context) =>
+            Icon(
+              Icons.my_location,
+              color: Colors.redAccent,
+              size: _markerSize,
+            )
+    )
+    );
+
+    return markers;
   }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        center: locations[0],
+        center: currentLocation,
         zoom: 12,
         minZoom: 5,
         maxZoom: 20,
@@ -42,7 +64,7 @@ class RcsMap extends StatelessWidget {
           subdomains: ['a', 'b', 'c'],
           backgroundColor: Theme.of(context).colorScheme.surface,
         ),
-        MarkerLayerOptions(markers: getMarkers(locations))
+        MarkerLayerOptions(markers: getMarkers(recycleCenters))
       ],
     );
   }
