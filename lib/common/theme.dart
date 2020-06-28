@@ -7,15 +7,15 @@ final ThemeData rcsTheme = ThemeData(
   accentColor: Color(0xFF17D5BF),
   colorScheme: ColorScheme(
     primary: Color(0xFF22975C),
-    primaryVariant: Color(0xFFbbedc4),
+    primaryVariant: Color(0xFF50AE72),
     secondary: Color(0xFFcae0d0),
-    secondaryVariant: Color(0xFFe8fced),
-    surface: Color(0xFFbbedc4),//Color(0xFF202945),
+    secondaryVariant: Color(0xFFFFFFFF),
+    surface: Color(0xFF4D9F69),
     background: Color(0xFF19A765),
-    error: Color(0xFF22975C),
-    onPrimary: Color(0x284730),
+    error: Colors.deepOrange,
+    onPrimary: Color(0xFF284730),
     //0xFF85A4BD
-    onSecondary: Color(0x284730),
+    onSecondary: Color(0xFF284730),
     //0xFF85A4BD
     onSurface: Color(0xFFa6bfad),
     onBackground: Color(0xddebe0),
