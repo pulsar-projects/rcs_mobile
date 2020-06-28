@@ -37,9 +37,6 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
       source: ImageSource.gallery,
     );
     if (image == null) return;
-    setState(() {
-      _isLoading = true;
-    });
 
     setState(() {
       print('image.path: ' + image.path);
@@ -47,8 +44,8 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
         print(value);
         _predictedImage = value['image'];
         _recognitions = value['recognitions'];
-        print(_predictedImage);
         _isLoading = false;
+        print(_predictedImage);
       });
     });
   }

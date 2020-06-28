@@ -94,7 +94,7 @@ class TfliteHelper {
       _recognitions = await _yolov2Tiny(image);
       print('end _yolov2Tiny');
     } else {
-      _recognitions  = await _ssdMobileNet(image);
+      _recognitions = await _ssdMobileNet(image);
       print('end _ssdMobileNet');
     }
     _result['recognitions'] = _recognitions;
@@ -102,11 +102,10 @@ class TfliteHelper {
     FileImage(image)
         .resolve(ImageConfiguration())
         .addListener((ImageStreamListener((ImageInfo info, bool _) {
-          print('ImageStreamListener');
-          print(info.image.width.toDouble().toString());
           _result['imageWidth'] = info.image.width.toDouble();
           _result['imageHeight'] = info.image.height.toDouble();
           _result['image'] = info.image;
+          print('end of ImageStreamListener');
         })));
 
     return _result;
