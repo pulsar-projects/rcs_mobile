@@ -1,10 +1,10 @@
 # Geopivot Mobile App - Recycling Centers and Services Mobile App
 
-(assets/logo.png)[Logo]
+[logo](assets/logo.png)
 
 # Pitch
 
-GeoPivot is powered by AI, Machine Learning, earth911 data and mobile technologies to bring the convenience of recycling to people's homes.
+GeoPivot is powered by AI, Machine Learning, [earth911.com](earth911.com) data and mobile technologies to bring the convenience of recycling to people's homes.
 
 ## Additional Information
 
