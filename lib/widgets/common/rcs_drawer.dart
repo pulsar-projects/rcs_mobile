@@ -55,7 +55,7 @@ class RcsDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              signOutGoogle();
+              signOut();
               Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
             },
           ),
