@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class ProcessedImage extends StatelessWidget {
   final File imgFile;
-  final recognitions;
+  final List<Widget> renderBoxes;
   final Size size;
 
   ProcessedImage({
     this.imgFile,
-    this.recognitions,
+    this.renderBoxes,
     this.size,
   });
 
@@ -26,7 +26,7 @@ class ProcessedImage extends StatelessWidget {
           : Image.file(imgFile),
     ));
 
-    stackChildren.addAll(recognitions);
+    stackChildren.addAll(renderBoxes);
 
     return Stack(
       children: stackChildren,
