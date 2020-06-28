@@ -40,15 +40,13 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
     if (imagePicker == null) return;
     final imageFile = File(imagePicker.path);
 
+    print('selectFromImagePicker image.path: ' + imageFile.path);
+    var results = await _tfliteHelper.predictImage(imageFile);
+
     setState(() {
-      print('selectFromImagePicker image.path: ' + imageFile.path);
-      _tfliteHelper.predictImage(imageFile).then((value) {
-        print(value);
-        _predictedImage = imageFile;
-        _recognitions = value['recognitions'];
-        _isLoading = false;
-        print(_predictedImage);
-      });
+      _predictedImage = imageFile;
+      _isLoading = false;
+      _recognitions = results['recognitions'];
     });
   }
 
