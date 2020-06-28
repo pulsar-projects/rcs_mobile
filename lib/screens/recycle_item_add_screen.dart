@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rcs_mobile/common/tflite_helper.dart';
-import 'package:rcs_mobile/widgets/common/index.dart';
 import 'package:rcs_mobile/screens/recycle_centers.dart';
+import 'package:rcs_mobile/widgets/common/index.dart';
 
 class RecycleItemAddScreen extends StatefulWidget {
   static const routeName = '/recycle-item-add';
@@ -83,7 +83,7 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  RecycleCentersMap(recognitions: _recognitions),
+                                  RecycleCentersMap(recognitions: _recognitions)
                             ),
                           );
                         },
