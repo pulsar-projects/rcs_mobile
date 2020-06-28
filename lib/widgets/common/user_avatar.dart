@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({
@@ -8,11 +9,16 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: CircleAvatar(
-        radius: 40,
-        backgroundImage: AssetImage(
-            'assets/sample/images/user-avatar.jpg'),
-      ),
+      child: user.photoUrl != null
+          ? CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(user.photoUrl),
+            )
+          : CircleAvatar(
+              radius: 40,
+              backgroundImage:
+                  AssetImage('assets/sample/images/user-avatar.jpg'),
+            ),
     );
   }
 }

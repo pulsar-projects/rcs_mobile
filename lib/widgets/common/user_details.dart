@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rcs_mobile/common/sign_in.dart';
 
 class UserDetails extends StatelessWidget {
   const UserDetails({
@@ -7,8 +8,10 @@ class UserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String text = user.displayName == null ? 'Irene Ford' : user.displayName;
+
     return Text(
-      'Irene Ford',
+      text,
       style: TextStyle(
           color: Theme.of(context).colorScheme.secondaryVariant,
           fontWeight: FontWeight.bold,
