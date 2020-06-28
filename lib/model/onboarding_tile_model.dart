@@ -9,19 +9,21 @@ List<OnboardingTileModel> getOnboardingTiles() {
   OnboardingTileModel onboardingTileModel = new OnboardingTileModel(
       imagePath: "assets/onboarding/onboarding-1.png",
       title: "Recycle",
-      description: "Recycle description"); //TODO: find a great desc for this
+      description: "Inspect your items and find the nearest recycling center.");
   tiles.add(onboardingTileModel);
 
   onboardingTileModel = new OnboardingTileModel(
       imagePath: "assets/onboarding/onboarding-2.png",
-      title: "PLACEHOLDER 2",
-      description: "PLACEHOLDER description"); //TODO: find a great desc for this
+      title: "Benefits",
+      description:
+          "Recycling helps reduce waste, conserve natural resources, prevent pollution and save energy.");
   tiles.add(onboardingTileModel);
 
   onboardingTileModel = new OnboardingTileModel(
       imagePath: "assets/onboarding/onboarding-3.png",
-      title: "PLACEHOLDER 3",
-      description: "PLACEHOLDER description"); //TODO: find a great desc for this
+      title: "Contribute",
+      description:
+          "By recycling you also help produce recycled-content products and jobs related to recycling.");
   tiles.add(onboardingTileModel);
 
   return tiles;

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class SignInButton extends StatelessWidget {
+class SignButton extends StatelessWidget {
   final Function onPressedFunction;
   final Widget iconImage;
   final String text;
 
-  const SignInButton(
+  const SignButton(
       {Key key,
-        @required this.context,
-        @required this.onPressedFunction,
-        this.iconImage,
-        this.text})
+      @required this.context,
+      @required this.onPressedFunction,
+      this.iconImage,
+      this.text})
       : super(key: key);
 
   final BuildContext context;
@@ -20,8 +20,10 @@ class SignInButton extends StatelessWidget {
     return FlatButton(
       splashColor: Color(0xFFbbedc4),
       onPressed: onPressedFunction,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-      color: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.5),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height * 0.07,
@@ -39,7 +41,7 @@ class SignInButton extends StatelessWidget {
                     text,
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.grey,
+                      color: Colors.black54,
                     ),
                   ),
                 )

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:rcs_mobile/screens/dashboard_screen.dart';
 import 'package:rcs_mobile/common/sign_in.dart';
 import 'package:rcs_mobile/screens/onboarding/onboarding_screen.dart';
-import 'package:rcs_mobile/widgets/sign_in_button.dart';
+import 'package:rcs_mobile/widgets/common/sign_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'email_sign_up_screen.dart';
+import 'email_sign_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -20,14 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color(0xFF70b57c).withOpacity(0.5),
+//        color: Theme.of(context).colorScheme.surface,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/onboarding/onboarding-1.png'),
-              SignInButton(
+              Image.asset('assets/logo.png'),
+              SignButton(
                 context: context,
                 onPressedFunction: () {
                   signInWithGoogle().whenComplete(() {
@@ -39,10 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     image: AssetImage("assets/google_logo.png"), height: 35.0),
                 text: 'Sign in with Google',
               ),
-              SignInButton(
+              SignButton(
                 context: context,
                 onPressedFunction: () {
-                  Navigator.of(context).pushNamed(EmailSignUpScreen.routeName);
+                  Navigator.of(context).pushNamed(EmailSignScreen.routeName, arguments: {'title': "Sign In with Email", 'isSignIn': true});
                 },
                 iconImage: Icon(
                   Icons.mail,
@@ -50,6 +50,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.black54,
                 ),
                 text: "Sign in with Email",
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(EmailSignScreen.routeName, arguments: {'title': "Sign Up with Email", 'isSignIn': false});
+                },
+                child: Text("Sign Up with Email",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black54,
+                ),),
               ),
               RaisedButton(
                 child: Text("View onboarding again (JUST FOR DEV)"),
@@ -60,6 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pushReplacementNamed(
                       context, OnboardingScreen.routeName);
                 },
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Image.asset('assets/leafs.png',),
+                ],
               )
             ],
           ),

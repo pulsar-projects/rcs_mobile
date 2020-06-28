@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:rcs_mobile/models/onboarding_tile_model.dart';
+import 'package:rcs_mobile/model/onboarding_tile_model.dart';
 import 'package:rcs_mobile/screens/login/login_screen.dart';
 import 'package:rcs_mobile/widgets/onboarding_widgets/onboarding_page_indicator.dart';
 import 'package:rcs_mobile/widgets/onboarding_widgets/onboarding_tile.dart';
