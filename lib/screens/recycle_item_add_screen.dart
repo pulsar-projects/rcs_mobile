@@ -15,7 +15,7 @@ class RecycleItemAddScreen extends StatefulWidget {
 class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
   bool _isLoading = false;
   TfliteHelper _tfliteHelper = TfliteHelper();
-  var _predictedImage;
+  File _predictedImage;
 
   List<Widget> _recognitions = [];
 
@@ -33,22 +33,20 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
 
   selectFromImagePicker() async {
     final picker = ImagePicker();
-    final image = await picker.getImage(
+    final imagePicker = await picker.getImage(
       source: ImageSource.gallery,
     );
-    if (image == null) return;
-    setState(() {
-      _isLoading = true;
-    });
+    if (imagePicker == null) return;
+    final imageFile = File(imagePicker.path);
 
     setState(() {
-      print('image.path: ' + image.path);
-      _tfliteHelper.predictImage(File(image.path)).then((value) {
+      print('selectFromImagePicker image.path: ' + imageFile.path);
+      _tfliteHelper.predictImage(imageFile).then((value) {
         print(value);
-        _predictedImage = value['image'];
+        _predictedImage = imageFile;
         _recognitions = value['recognitions'];
-        print(_predictedImage);
         _isLoading = false;
+        print(_predictedImage);
       });
     });
   }
