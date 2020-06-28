@@ -35,16 +35,3 @@ class _RecycleCentersMapState extends State<RecycleCentersMap> {
     );
   }
 }
-
-//Consumer<RecycledItemsProvider>(
-//builder: (context, recycledItemsProvider, _) => SliverList(
-//delegate: SliverChildBuilderDelegate(
-//(context, index) {
-//return RecycledCard(
-//recycledItem: recycledItemsProvider.getItems[index],
-//);
-//},
-//childCount: recycledItemsProvider.getItems.length,
-//),
-//),
-//),
