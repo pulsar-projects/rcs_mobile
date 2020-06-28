@@ -15,7 +15,7 @@ class RcsDrawer extends StatelessWidget {
               'User settings',
               style: TextStyle(
                 fontSize: 18,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondaryVariant,
               ),
             ),
             automaticallyImplyLeading: false,
@@ -32,7 +32,7 @@ class RcsDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w300,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
             onTap: () {
