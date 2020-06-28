@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:rcs_mobile/screens/recycle_centers.dart';
-import 'package:rcs_mobile/widgets/index.dart';
+import 'package:rcs_mobile/widgets/dashboard/index.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
