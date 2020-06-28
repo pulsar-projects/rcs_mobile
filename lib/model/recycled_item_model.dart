@@ -15,7 +15,7 @@ class RecycledItem {
   RecycledItemStatus status;
 
   RecycledItem({
-    @required this.id,
+    this.id,
     @required this.name,
     @required this.description,
     this.imagePath,
