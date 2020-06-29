@@ -51,6 +51,7 @@ class RecycledItemsProvider with ChangeNotifier {
   Future<void> fetchAndSetItems() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     String userId = user.uid.toString();
+    print('fetchAndSetItems for userId: ' + userId);
 
     _recycledItems = [];
 
@@ -60,6 +61,8 @@ class RecycledItemsProvider with ChangeNotifier {
         .collection('user_recycled_items')
         .getDocuments();
 
+    print('awaited for recycledItemDoc.documents : ' + recycledItemDoc.documents.length.toString());
+
     recycledItemDoc.documents.forEach((itemDoc) async {
       var recycledItemCenterDoc = await _firestoreInstance
           .collection('recycled_items')
@@ -68,6 +71,7 @@ class RecycledItemsProvider with ChangeNotifier {
           .document(itemDoc.documentID)
           .collection('recycle_center')
           .getDocuments();
+      print('awaited for recycledItemCenterDoc.documents : ' + recycledItemCenterDoc.documents.length.toString());
 
       _recycledItems.add(RecycledItem(
         id: itemDoc.documentID,
@@ -85,7 +89,10 @@ class RecycledItemsProvider with ChangeNotifier {
         ),
         //RecycledItemStatus status;
       ));
+      print('notifyListeners for _recycledItems: ' + _recycledItems.length.toString());
+      notifyListeners();
     });
+
   }
 
   List<RecycledItem> get getItems {
