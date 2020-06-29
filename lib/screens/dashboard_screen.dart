@@ -18,13 +18,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ScrollController _scrollController;
   bool lastAppBarStatus = true;
   RecycledItemsProvider _recycledItemsProvider;
+  Future _fetchedItems;
 
   _scrollListener() {
     if (isShrink != lastAppBarStatus) {
+//      lastAppBarStatus = isShrink;
       setState(() {
+        print('_scrollListener setState');
         lastAppBarStatus = isShrink;
       });
     }
+//    setState(() {
+//      print('_scrollListener setState');
+//    });
   }
 
   bool get isShrink {
@@ -42,8 +48,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+    _recycledItemsProvider =
+        Provider.of<RecycledItemsProvider>(context, listen: false);
 //    RecycledItemsProvider _recycledItemsProvider =
 //        Provider.of<RecycledItemsProvider>(context, listen: false);
+    _fetchedItems = _recycledItemsProvider.fetchAndSetItems();
     super.initState();
   }
 
@@ -57,13 +66,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    RecycledItemsProvider _recycledItemsProvider =
-        Provider.of<RecycledItemsProvider>(context, listen: false);
-
     return Scaffold(
       drawer: RcsDrawer(),
       body: FutureBuilder(
-          future: _recycledItemsProvider.fetchAndSetItems(),
+          future: _fetchedItems,
           builder: (context, snapshot) {
             return snapshot.connectionState == ConnectionState.done
                 ? () {
@@ -116,7 +122,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Consumer<RecycledItemsProvider>(
                           builder: (context, value, child) {
                             print('value: ' + value.toString());
-                            print('value.getItems.length: ' + value.getItems.length.toString());
+                            print('value.getItems.length: ' +
+                                value.getItems.length.toString());
                             print('snapshot : ' + snapshot.toString());
                             return value.getItems.length > 0
                                 ? SliverList(
