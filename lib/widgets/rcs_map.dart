@@ -67,7 +67,9 @@ class RcsMap extends StatelessWidget {
       height: MediaQuery.of(context).size.height*0.5,
       child: ListView(
         children: <Widget>[
-          Text(rc.description),
+          Text(rc.description, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),),
+          Text(rc.address),
+          Text(rc.hours),
           RaisedButton(
             textColor: Colors.white,
             color: Colors.green,
