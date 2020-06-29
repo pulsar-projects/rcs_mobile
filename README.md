@@ -2,6 +2,22 @@
 
 ![logo](assets/logo.png)
 
+![screenshot1](assets/screenshots/screenshot1.png)
+
+![screenshot2](assets/screenshots/screenshot2.png)
+
+![screenshot3](assets/screenshots/screenshot3.png)
+
+![screenshot4](assets/screenshots/screenshot4.png)
+
+![screenshot5](assets/screenshots/screenshot5.png) 
+
+![screenshot6](assets/screenshots/screenshot6.png)
+
+## Check out our presentation movie trailer :)
+
+[![Flutterhack2020 Submission: GeoPivot App](https://img.youtube.com/vi/mo0US3lpGYI/0.jpg)](https://youtu.be/mo0US3lpGYI)
+
 # Pitch
 
 GeoPivot is powered by AI, Machine Learning, [earth911.com](earth911.com) data and mobile technologies to bring the convenience of recycling to people's homes.
