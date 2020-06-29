@@ -2,17 +2,19 @@
 
 ![logo](assets/logo.png)
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 12-11-13.png)
+![screenshot1](assets/screenshots/Screenshot from 2020-06-29 12-11-13.png)
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 12-11-24.png)
+![screenshot2](assets/screenshots/Screenshot from 2020-06-29 12-11-24.png)
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 12-06-51.png)
+![screenshot3](assets/screenshots/Screenshot from 2020-06-29 12-06-51.png)
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 11-52-45.png)
+![screenshot4](assets/screenshots/Screenshot from 2020-06-29 11-52-45.png)
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 10-55-52.png) 
+![screenshot5](assets/screenshots/Screenshot from 2020-06-29 10-55-52.png) 
 
-![logo](assets/screenshots/Screenshot from 2020-06-29 10-55-56.png)
+![screenshot6](assets/screenshots/Screenshot from 2020-06-29 10-55-56.png)
+
+## Check out our presentation movie trailer :)
 
 [![Flutterhack2020 Submission: GeoPivot App](https://img.youtube.com/vi/mo0US3lpGYI/0.jpg)](https://youtu.be/mo0US3lpGYI)
 
