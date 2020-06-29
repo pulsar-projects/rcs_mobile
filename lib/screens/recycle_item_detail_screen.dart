@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rcs_mobile/model/recycle_center_model.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
+import 'package:rcs_mobile/model/recycled_item_status_enum.dart';
 import 'package:rcs_mobile/providers/recycled_items_provider.dart';
 import 'package:rcs_mobile/widgets/common/index.dart';
 
@@ -29,20 +31,41 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
       dateTime: _editedItem.dateTime,
       image: _pickedImage,
       imagePath: _pickedImage.path,
+//        final RecycleCenter recycleCenter;
+//        RecycledItemStatus status;
     );
   }
 
   var _editedItem = RecycledItem(
-    id: DateTime.now().toIso8601String(),
+    id: null,
     name: '',
     description: '',
     dateTime: null,
+    image: null,
+    imagePath: null,
+    recycleCenter: RecycleCenter(
+      id: null,
+      description: '',
+      longitude: null,
+      latitude: null,
+    ),
+    status: RecycledItemStatus.DEFAULT,
   );
+
   var _setInitValues = {
-    'id': DateTime.now().toIso8601String(),
+    'id': null,
     'name': '',
     'description': '',
     'dateTime': '',
+    'image': null,
+    'imagePath': null,
+    'recycleCenter': {
+      'id': null,
+      'description': '',
+      'longitude': null,
+      'latitude': null,
+    },
+    'status': RecycledItemStatus.DEFAULT.toString(),
   };
 
   var _isInit = true;
@@ -60,6 +83,15 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
           'name': _editedItem.name,
           'description': _editedItem.description,
           'dateTime': _editedItem.dateTime.toString(),
+          'image': _editedItem.image,
+          'imagePath': _editedItem.imagePath,
+          'recycleCenter': {
+            'id': _editedItem.recycleCenter.id,
+            'description': _editedItem.recycleCenter.description,
+            'longitude': _editedItem.recycleCenter.longitude,
+            'latitude': _editedItem.recycleCenter.latitude,
+          },
+          'status': _editedItem.status,
         };
       }
     }

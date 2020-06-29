@@ -69,7 +69,6 @@ class RecycledItemsProvider with ChangeNotifier {
           .collection('recycle_center')
           .getDocuments();
 
-      //recycledItemCenterDoc.documents.first.data
       _recycledItems.add(RecycledItem(
         id: itemDoc.documentID,
         name: itemDoc.data['name'],
@@ -146,18 +145,56 @@ class RecycledItemsProvider with ChangeNotifier {
       print('newItem ID: ' + newItem.id);
 
       _recycledItems.add(newItem);
-
+      notifyListeners();
       return newItem.id;
     } else {
       return null;
     }
   }
 
-  RecycledItem updateItem(String itemId, RecycledItem newRecycledItem) {
+  Future<RecycledItem> updateItem(
+      String itemId, RecycledItem newRecycledItem) async {
     print('image path: ' + newRecycledItem.imagePath);
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    String userId = user.uid.toString();
+
+    var recycledItemDoc = _firestoreInstance
+        .collection('recycled_items')
+        .document(userId)
+        .collection('user_recycled_items')
+        .document(itemId);
+
+    print('found recycledItemDoc ID: ' + recycledItemDoc.documentID);
+
+    recycledItemDoc.updateData({
+      'name': newRecycledItem.name,
+      'description': newRecycledItem.description,
+      'image_path': newRecycledItem.imagePath,
+      //image:
+      'date_time': newRecycledItem.dateTime.toIso8601String(),
+      'status': newRecycledItem.status.toShortString(),
+    });
+
+    var recycledItemCenterDoc = await _firestoreInstance
+        .collection('recycled_items')
+        .document(userId)
+        .collection('user_recycled_items')
+        .document(itemId)
+        .collection('recycle_center')
+        .getDocuments();
+
+    if (newRecycledItem.recycleCenter != null) {
+      recycledItemCenterDoc.documents.first.reference.updateData({
+        'description': newRecycledItem.recycleCenter.description,
+        'latitude': newRecycledItem.recycleCenter.latitude,
+        'longitude': newRecycledItem.recycleCenter.longitude,
+      });
+    }
+
     RecycledItem oldRecycledItem =
         _recycledItems.firstWhere((element) => element.id == itemId);
     _recycledItems[_recycledItems.indexOf(oldRecycledItem)] = newRecycledItem;
+    notifyListeners();
     return newRecycledItem;
   }
 
