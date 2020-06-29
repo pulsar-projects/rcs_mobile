@@ -2,17 +2,17 @@
 
 ![logo](assets/logo.png)
 
-![screenshot1](assets/screenshots/Screenshot from 2020-06-29 12-11-13.png)
+![screenshot1](assets/screenshots/screenshot1.png)
 
-![screenshot2](assets/screenshots/Screenshot from 2020-06-29 12-11-24.png)
+![screenshot2](assets/screenshots/screenshot2.png)
 
-![screenshot3](assets/screenshots/Screenshot from 2020-06-29 12-06-51.png)
+![screenshot3](assets/screenshots/screenshot3.png)
 
-![screenshot4](assets/screenshots/Screenshot from 2020-06-29 11-52-45.png)
+![screenshot4](assets/screenshots/screenshot4.png)
 
-![screenshot5](assets/screenshots/Screenshot from 2020-06-29 10-55-52.png) 
+![screenshot5](assets/screenshots/screenshot5.png) 
 
-![screenshot6](assets/screenshots/Screenshot from 2020-06-29 10-55-56.png)
+![screenshot6](assets/screenshots/screenshot6.png)
 
 ## Check out our presentation movie trailer :)
 
