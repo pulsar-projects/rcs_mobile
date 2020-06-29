@@ -37,25 +37,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.dispose();
   }
 
-//  void _onPressed() {
-//    firestoreInstance.collection("users").add(
-//        {
-//          "name" : "john",
-//          "age" : 50,
-//          "email" : "example@example.com",
-//          "address" : {
-//            "street" : "street 24",
-//            "city" : "new york"
-//          }
-//        }).then((value){
-//      print(value.documentID);
-//    });
-//  }
-
   @override
   void initState() {
-//    RecycledItemsProvider recycledItemsProvider = Provider.of<RecycledItemsProvider>(context,listen: false);
-//    recycledItemsProvider.fetchAndSetProducts();
+    RecycledItemsProvider recycledItemsProvider =
+        Provider.of<RecycledItemsProvider>(context, listen: false);
+    recycledItemsProvider.fetchAndSetItems();
 
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
@@ -64,6 +50,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    RecycledItemsProvider recycledItemsProvider =
+        Provider.of<RecycledItemsProvider>(context, listen: true);
+
     return Scaffold(
       drawer: RcsDrawer(),
       body: CustomScrollView(
@@ -105,18 +94,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          Consumer<RecycledItemsProvider>(
-            builder: (context, recycledItemsProvider, _) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return RecycledCard(
-                    recycledItem: recycledItemsProvider.getItems[index],
-                  );
-                },
-                childCount: recycledItemsProvider.getItems.length,
-              ),
-            ),
-          ),
+          recycledItemsProvider.getItems.length > 0
+              ? Consumer<RecycledItemsProvider>(
+                  builder: (context, recycledItemsProvider, _) => SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return RecycledCard(
+                          recycledItem: recycledItemsProvider.getItems[index],
+                        );
+                      },
+                      childCount: recycledItemsProvider.getItems.length,
+                    ),
+                  ),
+                )
+              : SliverList(
+                  delegate: SliverChildListDelegate([
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        'You have no items yet',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ]),
+                ),
         ],
       ),
       floatingActionButton: PickImageActionButton(),
