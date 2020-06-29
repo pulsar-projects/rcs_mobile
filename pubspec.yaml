@@ -32,6 +32,7 @@ dependencies:
   image: ^2.1.4
   google_sign_in: ^4.5.1
   firebase_auth: ^0.16.1
+  cloud_firestore: ^0.13.7
   shared_preferences: ^0.5.7+3
   after_layout: ^1.0.7+2
   flutter_map: any

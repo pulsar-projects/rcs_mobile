@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rcs_mobile/common/tflite_helper.dart';
 import 'package:rcs_mobile/model/recycled_item_model.dart';
 import 'package:rcs_mobile/model/recycle_center_model.dart';
+import 'package:rcs_mobile/model/recycled_item_status_enum.dart';
 import 'package:rcs_mobile/screens/recycle_centers.dart';
 import 'package:rcs_mobile/widgets/common/index.dart';
 import 'package:rcs_mobile/providers/recycled_items_provider.dart';
@@ -96,39 +97,43 @@ class _RecycleItemAddScreenState extends State<RecycleItemAddScreen> {
                   onPressed: (_recognitions.length == 0)
                       ? null
                       : () async {
-                    var rc = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              RecycleCentersMap(recognitions: _recognitions)
-                      ),
-                    );
+                          var rc = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RecycleCentersMap(
+                                    recognitions: _recognitions)),
+                          );
 
-                    setState(() {
-                      _recycleCenter = rc;
-                    });
-                  },
+                          setState(() {
+                            _recycleCenter = rc;
+                          });
+                        },
                   color: Colors.green,
                 ),
                 RaisedButton(
                   child: Text('Save'),
-                  onPressed: (_recognitions == null || _recognitions.length == 0 || _recycleCenter == null) ? null : () async {
-                    RecycledItem newItem = new RecycledItem(
-                        id: DateTime.now().toIso8601String(),
-                        name: _recognitions[0]['detectedClass'],
-                        description: _recognitions[0]['detectedClass'],
-                        recycleCenter: _recycleCenter,
-                        dateTime: DateTime.now(),
-                        image: _predictedImage,
-                        imagePath: _predictedImage.path,
-                    );
+                  onPressed: (_recognitions == null ||
+                          _recognitions.length == 0 ||
+                          _recycleCenter == null)
+                      ? null
+                      : () async {
+                          RecycledItem newItem = new RecycledItem(
+                            id: null,
+                            name: _recognitions[0]['detectedClass'],
+                            description: _recognitions[0]['detectedClass'],
+                            recycleCenter: _recycleCenter,
+                            dateTime: DateTime.now(),
+                            image: _predictedImage,
+                            imagePath: _predictedImage.path,
+                            status: RecycledItemStatus.DEFAULT,
+                          );
 
-                    await Provider.of<RecycledItemsProvider>(context, listen: false)
-                        .addItem(newItem);
+                          await Provider.of<RecycledItemsProvider>(context,
+                                  listen: false)
+                              .addItem(newItem);
 
-                    Navigator.pop(context);
-
-                  },
+                          Navigator.pop(context);
+                        },
                   textColor: Colors.white,
                   color: Colors.green,
                 )

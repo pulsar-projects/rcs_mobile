@@ -37,8 +37,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.dispose();
   }
 
+//  void _onPressed() {
+//    firestoreInstance.collection("users").add(
+//        {
+//          "name" : "john",
+//          "age" : 50,
+//          "email" : "example@example.com",
+//          "address" : {
+//            "street" : "street 24",
+//            "city" : "new york"
+//          }
+//        }).then((value){
+//      print(value.documentID);
+//    });
+//  }
+
   @override
   void initState() {
+//    RecycledItemsProvider recycledItemsProvider = Provider.of<RecycledItemsProvider>(context,listen: false);
+//    recycledItemsProvider.fetchAndSetProducts();
+
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     super.initState();
