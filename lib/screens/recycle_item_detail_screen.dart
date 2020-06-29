@@ -178,6 +178,7 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
                     dateTime: _editedItem.dateTime,
                     image: _editedItem.image,
                     imagePath: _editedItem.imagePath,
+                    recycleCenter: _editedItem.recycleCenter,
                   );
                 },
               ),
@@ -196,12 +197,12 @@ class _RecycleItemDetailScreenState extends State<RecycleItemDetailScreen> {
                 },
                 onSaved: (value) {
                   _editedItem = RecycledItem(
-                    id: _editedItem.id,
                     name: _editedItem.name,
                     description: value,
                     dateTime: _editedItem.dateTime,
                     image: _editedItem.image,
                     imagePath: _editedItem.imagePath,
+                    recycleCenter: _editedItem.recycleCenter,
                   );
                 },
               ),

@@ -17,8 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   TextEditingController editingController = TextEditingController();
   ScrollController _scrollController;
   bool lastAppBarStatus = true;
-  bool _isInit = true;
-  bool _isLoading = false;
+  Future _fetchAndSetItems;
 
   _scrollListener() {
     if (isShrink != lastAppBarStatus) {
@@ -43,107 +42,104 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+//    _fetchAndSetItems =
+//        Provider.of<RecycledItemsProvider>(context, listen: true)
+//            .fetchAndSetItems();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      Provider.of<RecycledItemsProvider>(context).fetchAndSetItems().then((_) {
-        setState(() {
-          _isLoading = false;
-        });
-      });
-    }
-    _isInit = false;
+    _fetchAndSetItems =
+        Provider.of<RecycledItemsProvider>(context, listen: true)
+            .fetchAndSetItems();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    RecycledItemsProvider recycledItemsProvider =
-        Provider.of<RecycledItemsProvider>(context, listen: true);
-    if (_isInit) {
-      recycledItemsProvider.fetchAndSetItems();
-    }
-
     return Scaffold(
       drawer: RcsDrawer(),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : CustomScrollView(
-              controller: _scrollController,
-              slivers: <Widget>[
-                SliverAppBar(
-                  pinned: true,
-                  actions: isShrink ? <Widget>[AvatarFlatButton()] : null,
-                  backgroundColor: isShrink
-                      ? Theme.of(context).colorScheme.surface
-                      : Colors.transparent,
-                  elevation: 4,
-                  expandedHeight: Platform.isIOS
-                      ? (MediaQuery.of(context).size.height) * 0.35
-                      : (MediaQuery.of(context).size.height) * 0.45,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      padding: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.height) * 0.1),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
-                        shape: BoxShape.rectangle,
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(50)),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          UserAvatar(),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: UserDetails(),
-                          ),
-                          UserStats(),
-                          SizedBox(height: 15),
-                          SearchBar(editingController: editingController)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                recycledItemsProvider.getItems.length > 0
-                    ? SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            return RecycledCard(
-                              recycledItem:
-                                  recycledItemsProvider.getItems[index],
-                            );
-                          },
-                          childCount: recycledItemsProvider.getItems.length,
-                        ),
-                      )
-                    : SliverList(
-                        delegate: SliverChildListDelegate([
-                          Container(
-                            padding: EdgeInsets.all(20),
-                            child: Text(
-                              'You have no items yet',
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
+      body: FutureBuilder(
+          future: _fetchAndSetItems,
+          builder: (context, snapshot) {
+            return snapshot.connectionState == ConnectionState.waiting
+                ? Center(child: CircularProgressIndicator())
+                : CustomScrollView(
+                    controller: _scrollController,
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        pinned: true,
+                        actions: isShrink ? <Widget>[AvatarFlatButton()] : null,
+                        backgroundColor: isShrink
+                            ? Theme.of(context).colorScheme.surface
+                            : Colors.transparent,
+                        elevation: 4,
+                        expandedHeight: Platform.isIOS
+                            ? (MediaQuery.of(context).size.height) * 0.35
+                            : (MediaQuery.of(context).size.height) * 0.45,
+                        flexibleSpace: FlexibleSpaceBar(
+                          background: Container(
+                            padding: EdgeInsets.only(
+                                top:
+                                    (MediaQuery.of(context).size.height) * 0.1),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).colorScheme.primaryVariant,
+                              shape: BoxShape.rectangle,
+                              borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(50)),
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                UserAvatar(),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: UserDetails(),
+                                ),
+                                UserStats(),
+                                SizedBox(height: 15),
+                                SearchBar(editingController: editingController)
+                              ],
                             ),
                           ),
-                        ]),
+                        ),
                       ),
-              ],
-            ),
+                      Consumer<RecycledItemsProvider>(
+                        builder: (context, value, child) {
+                          return value.getItems.length > 0
+                              ? SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                    (context, index) {
+                                      return RecycledCard(
+                                        recycledItem: value.getItems[index],
+                                      );
+                                    },
+                                    childCount: value.getItems.length,
+                                  ),
+                                )
+                              : child;
+                        },
+                        child: SliverList(
+                          delegate: SliverChildListDelegate([
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                'You have no items yet',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ],
+                  );
+          }),
       floatingActionButton: PickImageActionButton(),
     );
   }
