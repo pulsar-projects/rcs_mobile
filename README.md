@@ -1,6 +1,15 @@
-# Geopivot Mobile App - Recycling Centers and Services Mobile App
-
 <img src="./assets/logo.png" width="180">
+
+# Geopivot Mobile App 
+A Recycling Centers and Services Mobile App
+
+## Contents
+
+- [Pitch](#Pitch)
+- [Additional Information](#Additional-Information)
+- [Tags](#Tags)
+- [Development notes](#Development-notes)
+    - [iOS](#iOS)
 
 ## Pitch
 
