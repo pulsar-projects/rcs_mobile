@@ -1,26 +1,20 @@
 # Geopivot Mobile App - Recycling Centers and Services Mobile App
 
-![logo](assets/logo.png)
+<img src="./assets/logo.png" width="180">
 
-![screenshot1](assets/screenshots/screenshot1.png)
-
-![screenshot2](assets/screenshots/screenshot2.png)
-
-![screenshot3](assets/screenshots/screenshot3.png)
-
-![screenshot4](assets/screenshots/screenshot4.png)
-
-![screenshot5](assets/screenshots/screenshot5.png) 
-
-![screenshot6](assets/screenshots/screenshot6.png)
-
-## Check out our presentation movie trailer :)
-
-[![Flutterhack2020 Submission: GeoPivot App](https://img.youtube.com/vi/mo0US3lpGYI/0.jpg)](https://youtu.be/mo0US3lpGYI)
-
-# Pitch
+## Pitch
 
 GeoPivot is powered by AI, Machine Learning, [earth911.com](earth911.com) data and mobile technologies to bring the convenience of recycling to people's homes.
+
+| Join  | Sign up | Introduction |
+| :-----------: | :-----------: | :-----------: |
+| <img src="./assets/screenshots/screenshot1.png" width="350"> | <img src="./assets/screenshots/screenshot2.png" width="350"> | <img src="./assets/screenshots/screenshot3.png" width="350"> |
+| Your Dashboard  | Detection | Recycling Centres |
+| <img src="./assets/screenshots/screenshot4.png" width="350"> | <img src="./assets/screenshots/screenshot5.png" width="350"> | <img src="./assets/screenshots/screenshot6.png" width="350"> |
+
+Check out our flutter hackathon presentation trailer:
+
+[<img src="https://img.youtube.com/vi/mo0US3lpGYI/0.jpg" width="180" title="Flutterhack2020 Submission: GeoPivot App">](https://youtu.be/mo0US3lpGYI)
 
 ## Additional Information
 
