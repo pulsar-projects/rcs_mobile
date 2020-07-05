@@ -134,7 +134,7 @@ Please **DON'T COMMIT THESE KEYS INTO GIT** ! Any issues, get in touch.
 | `├── screens` | screens widget types |
 | `│   ├── login` | placeholder for login screen specific widgets (NOTE: section will be merged under `widgets` folder) |
 | `│   ├── onboarding` | placeholder for onboarding specific widgets (NOTE: section will be merged with `onboarding_widgets` folder) |
-| `└── widgets` | Folder desc |
+| `└── widgets` | root for all custom widgets |
 | `    ├── common` | common app widget |
 | `    ├── dashboard` | placeholder for dashboard specific widgets |
 | `    ├── onboarding_widgets` | placeholder for onboarding specific widgets |
