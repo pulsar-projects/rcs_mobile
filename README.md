@@ -1,22 +1,26 @@
 <img src="./assets/logo.png" width="180">
 
-# Geopivot Mobile App 
+# Geopivot Mobile App <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart"> ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/pulsar-projects/rcs_mobile) ![GitHub repo size](https://img.shields.io/github/repo-size/pulsar-projects/rcs_mobile)
 A Recycling Centers and Services Mobile App
 
 ## Contents
 
 - [Pitch](#Pitch)
 - [Additional Information](#Additional-Information)
-- [Tags](#Tags)
 - [Development notes](#Development-notes)
-    - [iOS](#iOS)
+    - [How to run things locally](#How-to-run-things-locally)
+    - [Firebase](#Firebase)
+    - [Android](#Android)
+    - [Code Structure](#Code-Structure)
+- [Tags](#Tags)
 
 ## Pitch
 
 GeoPivot is powered by AI, Machine Learning, [earth911.com](earth911.com) data and mobile technologies to bring the convenience of recycling to people's homes.
 
-| Join  | Sign up | Introduction |
+| | | |
 | :-----------: | :-----------: | :-----------: |
+| Join  | Sign up | Introduction |
 | <img src="./assets/screenshots/screenshot1.png" width="350"> | <img src="./assets/screenshots/screenshot2.png" width="350"> | <img src="./assets/screenshots/screenshot3.png" width="350"> |
 | Your Dashboard  | Detection | Recycling Centres |
 | <img src="./assets/screenshots/screenshot4.png" width="350"> | <img src="./assets/screenshots/screenshot5.png" width="350"> | <img src="./assets/screenshots/screenshot6.png" width="350"> |
@@ -24,6 +28,9 @@ GeoPivot is powered by AI, Machine Learning, [earth911.com](earth911.com) data a
 Check out our flutter hackathon presentation trailer:
 
 [<img src="https://img.youtube.com/vi/mo0US3lpGYI/0.jpg" width="180" title="Flutterhack2020 Submission: GeoPivot App">](https://youtu.be/mo0US3lpGYI)
+
+![YouTube Video Views](https://img.shields.io/youtube/views/mo0US3lpGYI?style=social)
+![YouTube Video Votes](https://img.shields.io/youtube/likes/mo0US3lpGYI?style=social&withDislikes)
 
 ## Additional Information
 
@@ -54,11 +61,83 @@ GeoPivot makes recycling easier, allowing users to take/upload pictures with mob
 
 ## Development notes 
 
+### How to run things locally
+
+- To contribute or even to test/run locally this project we recommend the following setup (based `flutter doctor -v` , but removed user specific):
+```
+[✓] Flutter (Channel stable, v1.17.5, on Mac OS X 10.15.4 19E287, locale en-GB)
+    • Flutter version 1.17.5
+    • Framework revision 8af6b2f038 (5 days ago), 2020-06-30 12:53:55 -0700
+    • Engine revision ee76268252
+    • Dart version 2.8.4
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    • Android SDK
+    • Platform android-29, build-tools 29.0.3
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    • All Android licenses accepted.
+
+[✓] Xcode - develop for iOS and macOS (Xcode 11.5)
+    • Xcode 11.5, Build version 11E608c
+    • CocoaPods version 1.9.3
+
+[✓] Android Studio (version 4.0)
+    • Flutter plugin version 46.0.2
+    • Dart plugin version 193.7361
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] IntelliJ IDEA Ultimate Edition (version 2020.1.2)
+    • Flutter plugin version 47.0.3
+    • Dart plugin version 201.7846.93
+```
+- The app uses a [Firebase](https://firebase.google.com/) based backend. You will need access to the backend keys to be able to use the backend, for that please get in touch with the repo owners/contributors.
+- Once you have the keys you MUST keep these safe at all time, and is your responsibility not to lose them. If you have any concerns, please let us know as soon as possible.
+- The keys should be saved into the following two locations based on Platform and ignored by git:
+    - android: `android/app/google-services.json`
+    - ios: `ios/credentials/GoogleService-Info.plist`
+
+Please **DON'T COMMIT THESE KEYS INTO GIT** ! Any issues, get in touch.
+
+### Firebase
+
+- Project Name: `pulsar-projects`
+- [Firebase Authentication](https://firebase.google.com/docs/auth) enabled flows: 
+    - Email/Password
+    - Google
+- Database: [Cloud Filestore](https://cloud.google.com/filestore)
+    - sec: rule based
+    - main collections:
+        - list of `recycled_items`
+            - list of `user_recycled_items`
+                -  model properties
+                -  list of `recycle_center`
+
+### Android
+- include [Firebase updated plist for android](https://support.google.com/firebase/answer/7015592?hl=en#android) into the app folder: `android/app/google-services.json`
+- double-check that git ignores the file
+
 ### iOS
-- include firebase updated plist into the credentials folder: `ios/credentials/GoogleService-Info.plist`
+- include [Firebase updated plist for ios](https://support.google.com/firebase/answer/7015592?hl=en#ios) into the `credentials` folder: `ios/credentials/GoogleService-Info.plist`
+- double-check that git ignores the file!
 - in XCode, on the left hand side select the `GoogleService-Info.plist` under Runner and map it to the above location
 - in Project > Runner > set Compile Sources As : `Objective-C++`
 - in Project > Runner set Project Format to `11.0` and iOS Deployment Target to `11.0`
+
+### Code Structure
+
+| Location | Description |
+| :--- | :--- |
+| `lib` | root folder |
+| `├── common` | common project wide helpers or shared objects |
+| `├── model` | plain objects and models |
+| `├── providers` | provider based models |
+| `├── screens` | screens widget types |
+| `│   ├── login` | placeholder for login screen specific widgets (NOTE: section will be merged under `widgets` folder) |
+| `│   ├── onboarding` | placeholder for onboarding specific widgets (NOTE: section will be merged with `onboarding_widgets` folder) |
+| `└── widgets` | Folder desc |
+| `    ├── common` | common app widget |
+| `    ├── dashboard` | placeholder for dashboard specific widgets |
+| `    ├── onboarding_widgets` | placeholder for onboarding specific widgets |
 
 ## Tags
 `computer-vision`, `detection`, `flutter`, `firebase`, `firebase-authentication`, `earth911`, `machine-learning`, `object-detection`, `recycling-centers`, `tensorflow`, `andriod`, `ios`, `map`, `recycle`, `yolov`, `street-map`
