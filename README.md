@@ -113,8 +113,10 @@ Please **DON'T COMMIT THESE KEYS INTO GIT** ! Any issues, get in touch.
                 -  list of `recycle_center`
 
 ### Android
-- include [Firebase updated plist for android](https://support.google.com/firebase/answer/7015592?hl=en#android) into the app folder: `android/app/google-services.json`
+- include [Firebase updated Google-Services.json for android](https://support.google.com/firebase/answer/7015592?hl=en#android) into the app folder: `android/app/google-services.json`
 - double-check that git ignores the file
+- we are running firebase in debug mode, it can only be accessed from development machines, to setup your device
+generate an SHA256 or SH-1 key and add it to the android project under firebase. [Follow instructions here for generting a new key.](https://developers.google.com/android/guides/client-auth)
 
 ### iOS
 - include [Firebase updated plist for ios](https://support.google.com/firebase/answer/7015592?hl=en#ios) into the `credentials` folder: `ios/credentials/GoogleService-Info.plist`
