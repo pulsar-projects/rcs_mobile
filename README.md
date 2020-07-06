@@ -140,4 +140,4 @@ Please **DON'T COMMIT THESE KEYS INTO GIT** ! Any issues, get in touch.
 | `    ├── onboarding_widgets` | placeholder for onboarding specific widgets |
 
 ## Tags
-`computer-vision`, `detection`, `flutter`, `firebase`, `firebase-authentication`, `earth911`, `machine-learning`, `object-detection`, `recycling-centers`, `tensorflow`, `andriod`, `ios`, `map`, `recycle`, `yolov`, `street-map`
+`computer-vision`, `detection`, `flutter`, `firebase`, `firebase-authentication`, `earth911`, `machine-learning`, `object-detection`, `recycling-centers`, `tensorflow`, `android`, `ios`, `map`, `recycle`, `yolo`, `street-map`
