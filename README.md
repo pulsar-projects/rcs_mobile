@@ -50,7 +50,7 @@ GeoPivot makes recycling easier, allowing users to take/upload pictures with mob
 
 ## Technical Details
 
-- for Object Detection we have integrated Tensorflow Lite TiniyYoloV2
+- for Object Detection we have integrated Tensorflow Lite TinyYoloV2
 - For data-models, stubs and explorations we  have used Earth911 API
 - Maps are supported by Flutter Map with Open Street Maps
 - for Authentication we use  Firebase Authentication with supported flows for Email/Password  and Google sign-in
@@ -104,7 +104,7 @@ Please **DON'T COMMIT THESE KEYS INTO GIT** ! Any issues, get in touch.
 - [Firebase Authentication](https://firebase.google.com/docs/auth) enabled flows: 
     - Email/Password
     - Google
-- Database: [Cloud Filestore](https://cloud.google.com/filestore)
+- Database: [Cloud Firestore](https://cloud.google.com/filestore)
     - sec: rule based
     - main collections:
         - list of `recycled_items`
